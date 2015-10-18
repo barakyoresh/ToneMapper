@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <XCTest/XCTest.h>
+
+@import Nimble;
+@import Quick;
 
 @interface ToneMapperTests : XCTestCase
 
@@ -27,7 +29,7 @@
 
 - (void)testExample {
     // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+  expect(@YES).to(beTrue());
 }
 
 - (void)testPerformanceExample {

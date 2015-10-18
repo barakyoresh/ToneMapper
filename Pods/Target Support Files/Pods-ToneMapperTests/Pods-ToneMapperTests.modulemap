@@ -1,0 +1,6 @@
+framework module Pods_ToneMapperTests {
+  umbrella header "Pods-ToneMapperTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

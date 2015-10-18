@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Barak Yoresh. All rights reserved.
 //
 
+#import <OpenGLES/EAGL.h>
+
 #import "AppDelegate.h"
 
 @interface AppDelegate ()
@@ -17,6 +19,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   // Override point for customization after application launch.
+  [EAGLContext setCurrentContext:[[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2]];
   return YES;
 }
 

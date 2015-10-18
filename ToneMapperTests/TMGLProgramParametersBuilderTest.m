@@ -3,6 +3,7 @@
 
 
 #import "TMGLProgramParametersBuilder.h"
+#import "TMGLProgramAttribute.h"
 
 @import Quick;
 @import Nimble;

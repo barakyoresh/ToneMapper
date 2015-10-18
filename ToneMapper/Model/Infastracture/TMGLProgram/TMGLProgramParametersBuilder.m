@@ -4,6 +4,7 @@
 #import "TMGLProgramUniform1i.h"
 #import "TMGLProgramUniformMatrix4f.h"
 #import "TMGLProgramParametersBuilder.h"
+#import "TMGLProgramAttribute.h"
 #import "TMGLGeometry.h"
 
 static NSString * const kModelViewProjectionMatrixUniform = @"MVP";

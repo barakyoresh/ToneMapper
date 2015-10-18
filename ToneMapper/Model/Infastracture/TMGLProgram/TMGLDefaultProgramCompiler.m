@@ -2,8 +2,8 @@
 // Created by Barak Yoresh.
 
 #import "TMGLDefaultShaderCompiler.h"
-
 #import "TMGLDefaultProgramCompiler.h"
+#import "TMGLProgramAttribute.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -12,15 +12,15 @@ QuickSpecBegin(DefaultShaderCompilerSpec)
 describe(@"a default shader compiler", ^{
   TMGLDefaultShaderCompiler *shaderCompiler = [[TMGLDefaultShaderCompiler alloc] init];
   
-  it(@"should return 0 for illeagle shader types", ^{
+  it(@"should return 0 for illegal shader types", ^{
     expect(@([shaderCompiler createShaderType:GL_ZERO
                                        FromPath:@"non_existing_path"
                                    withFileType:@"vsh"])).to(equal(@0));
   });
   
-  it(@"should return non-zero for leagle shader types", ^{
+  it(@"should return non-zero for legal shader types", ^{
     expect(@([shaderCompiler createShaderType:GL_VERTEX_SHADER
-                                       FromPath:@"TMGLEngine"
+                                       FromPath:@"TMGLIdentityProgram"
                                    withFileType:@"vsh"])).toNot(equal(@0));
   });
   
@@ -32,7 +32,7 @@ describe(@"a default shader compiler", ^{
   
   it(@"should return non-zero for good file paths", ^{
     expect(@([shaderCompiler createShaderType:GL_VERTEX_SHADER
-                                       FromPath:@"TMGLEngine"
+                                       FromPath:@"TMGLIdentityProgram"
                                    withFileType:@"vsh"])).toNot(equal(@0));
   });
   
@@ -45,13 +45,13 @@ describe(@"a default shader compiler", ^{
   
   it(@"should return non-zero for good file path extensions", ^{
     expect(@([shaderCompiler createShaderType:GL_VERTEX_SHADER
-                                       FromPath:@"TMGLEngine"
+                                       FromPath:@"TMGLIdentityProgram"
                                    withFileType:@"vsh"])).toNot(equal(@0));
   });
   
   it(@"should return 0 for bad file path extension and type combinations", ^{
     expect(@([shaderCompiler createShaderType:GL_VERTEX_SHADER
-                                       FromPath:@"TMGLEngine"
+                                       FromPath:@"TMGLIdentityProgram"
                                    withFileType:@"fsh"])).to(equal(@0));
   });
 

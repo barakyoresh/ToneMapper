@@ -3,9 +3,7 @@
 
 #import <OpenGLES/ES2/gl.h>
 #import <GLKit/GLKit.h>
-#import <Foundation/Foundation.h>
 
-#import "TMGLProgramAttribute.h"
 #import "TMGLProgramUniform.h"
 
 NS_ASSUME_NONNULL_BEGIN

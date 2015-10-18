@@ -2,6 +2,7 @@
 // Created by Barak Yoresh.
 
 #import "TMGLProgramParameters.h"
+#import "TMGLProgramAttribute.h"
 
 NS_ASSUME_NONNULL_BEGIN
 

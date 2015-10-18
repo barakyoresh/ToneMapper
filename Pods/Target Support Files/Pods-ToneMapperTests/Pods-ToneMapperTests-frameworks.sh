@@ -53,9 +53,13 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework 'Pods-ToneMapperTests/Nimble.framework'
+  install_framework 'Pods-ToneMapperTests/OCHamcrest.framework'
+  install_framework 'Pods-ToneMapperTests/OCMockito.framework'
   install_framework 'Pods-ToneMapperTests/Quick.framework'
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework 'Pods-ToneMapperTests/Nimble.framework'
+  install_framework 'Pods-ToneMapperTests/OCHamcrest.framework'
+  install_framework 'Pods-ToneMapperTests/OCMockito.framework'
   install_framework 'Pods-ToneMapperTests/Quick.framework'
 fi

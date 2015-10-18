@@ -2,50 +2,75 @@
 // Created by Barak Yoresh.
 
 #import "TMGLProgramParameters.h"
-#import "TMGLProgramParametersBuilder.h"
-#import "TMGLProgramUniform1i.h"
-
 
 @import Quick;
 @import Nimble;
 
+//#define HC_SHORTHAND
+//#import <OCHamcrest/OCHamcrest.h>
+//
+//#define MOCKITO_SHORTHAND
+//#import <OCMockito/OCMockito.h>
+
 QuickSpecBegin(ProgramParametersSpec)
 
-describe(@"A TMGLProgramParameters object", ^{
-  __block TMGLProgramParameters *programParameters;
+describe(@"Program Parameters", ^{
+  NSArray *attributes = [[NSArray alloc] init];
+  //id<TMGLProgramUniform> uniform = MKTMockProtocol(@protocol(TMGLProgramUniform));
+  //[MKTGiven([uniform name]) willReturn:@"uinf1"];
+  NSArray *uniforms = [[NSArray alloc] init];
+  //NSLog(@"uniform: %@", uniform);
+
+  TMGLProgramParameters *programParameters =
+  [[TMGLProgramParameters alloc] initWithVertexShaderName:@"vShader" FragmentShaderName:@"fShader"
+                                               attributes:attributes unifroms:uniforms
+                                            drawingMethod:GL_TRIANGLES andVertexCount:1];
   
-  beforeEach(^{
-    TMGLProgramParametersBuilder *builder = [[TMGLProgramParametersBuilder alloc] init];
-    GLint unif1 = 1, unif2 = 2;
-    [[[[[[[builder setVertexShader:@"vShader"]
-          setFragmentShader:@"fShader"]
-         addAttribute:@"attr1" valuePointer:(void *)1 size:1 type:GL_FLOAT andStride:1]
-        addAttribute:@"attr2" valuePointer:(void *)2 size:1 type:GL_FLOAT andStride:1]
-       addUniform:@"unif1" valuePointer:&unif1 andType:TMGLUniformInt]
-      addUniform:@"unif2" valuePointer:&unif2 andType:TMGLUniformInt]
-     setDrawingMethod:GL_TRIANGLE_STRIP andVertexCount:1];
+  context(@"parameters", ^{
     
-    programParameters = [builder build];
+    it(@"Should retain its vertexShaderName value", ^{
+          expect([programParameters vertexShaderName]).to(equal(@"vShader"));
+    });
+    
+    it(@"Should retain its fragmentShaderName value", ^{
+      expect([programParameters fragmentShaderName]).to(equal(@"fShader"));
+    });
+    
+    it(@"Should retain its attributes value", ^{
+      expect([programParameters attributes]).to(equal(attributes));
+    });
+    
+    it(@"Should retain its uniforms value", ^{
+      expect([programParameters uniforms]).to(equal(uniforms));
+    });
+    
+    it(@"Should retain its drawingMethod value", ^{
+      expect(@([programParameters drawingMethod])).to(equal(@(GL_TRIANGLES)));
+    });
+    
+    it(@"Should retain its vertexCount value", ^{
+      expect(@([programParameters vertexCount])).to(equal(@(1)));
+    });
+    
   });
   
-  context(@"Replacing a single unfiorms", ^{
+  context(@"methods", ^{
     
-    beforeEach(^{
-      TMGLProgramUniform1i *unif2 = [[TMGLProgramUniform1i alloc] initWithName:@"unif2" andValue:3];
-      programParameters = [programParameters parametersWithReplacedUniform:unif2];
+    it(@"Should be able to replace uniforms", ^{
+      NSArray *uniforms2 = [[NSArray alloc] init];
+      TMGLProgramParameters *programParameters2 = [programParameters parametersWithReplacedUniforms:uniforms2];
+      expect([programParameters2 uniforms]).to(equal(uniforms2));
     });
     
-    it(@"Should leave untouched uniforms as they were", ^{
-      for (id <TMGLProgramUniform> unif in programParameters.uniforms) {
-        if ([[unif name] isEqualToString:@"unif1"]) {
-          // somehow check its still valued 1
-        }
-      }
+    it(@"Should be able to replace a single uniform", ^{
+//      id<TMGLProgramUniform> unifrom2 = MKTMockProtocol(@protocol(TMGLProgramUniform));
+//      [MKTGiven([uniform name]) willReturn:@"uinf1"];
+//      TMGLProgramParameters *programParameters2 = [programParameters parametersWithReplacedUniform:unifrom2];
+//      expect([[programParameters2 uniforms] firstObject]).to(equal(unifrom2));
     });
+    
   });
 
-  
-  
 });
 
 QuickSpecEnd

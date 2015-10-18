@@ -106,7 +106,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
 - (UIActivityIndicatorView *)createLoadingIndicator {
   UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]
-                                        initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+                            initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
   indicator.center = self.view.center;
   [self.view addSubview:indicator];
   [indicator bringSubviewToFront:self.view];

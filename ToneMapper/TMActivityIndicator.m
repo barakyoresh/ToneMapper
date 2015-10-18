@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithView:(UIView * __nonnull)view {
   if (self = [super init]) {
     UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]
-                                          initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+                            initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     indicator.center = view.center;
     [view addSubview:indicator];
     [indicator bringSubviewToFront:view];

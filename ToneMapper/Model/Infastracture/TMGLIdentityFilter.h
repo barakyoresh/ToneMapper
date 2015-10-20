@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Initializer method for \c TMGLIdentityFilter object, with \c compiler as its internal program
 /// compiler.
 - (instancetype)initWithProgramCompiler:(id<TMGLProgramCompiler>)programCompiler
-NS_DESIGNATED_INITIALIZER;
+    NS_DESIGNATED_INITIALIZER;
 
 @end
 

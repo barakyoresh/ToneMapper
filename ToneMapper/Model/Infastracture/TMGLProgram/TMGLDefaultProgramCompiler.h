@@ -7,7 +7,8 @@
 #import <Foundation/Foundation.h>
 
 #import "TMGLProgramCompiler.h"
-#import "TMGLShaderCompiler.h"
+
+@protocol TMGLShaderCompiler;
 
 NS_ASSUME_NONNULL_BEGIN
 

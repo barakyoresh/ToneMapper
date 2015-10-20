@@ -19,6 +19,8 @@
 		843DD0F71BAEF2CC001500F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843DD0F61BAEF2CC001500F0 /* Images.xcassets */; };
 		843DD0FA1BAEF2CC001500F0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843DD0F81BAEF2CC001500F0 /* LaunchScreen.xib */; };
 		844EB6DC1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 844EB6DB1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.m */; };
+		8482322F1BD637B0009192EC /* TMGLFeatureManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8482322E1BD637B0009192EC /* TMGLFeatureManagerViewController.m */; };
+		848232361BD6837D009192EC /* TMTestFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = 848232351BD6837D009192EC /* TMTestFeature.m */; };
 		849523081BD37C0D00F01C75 /* TMGLProgramParametersBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 849523071BD37C0D00F01C75 /* TMGLProgramParametersBuilder.m */; };
 		8495230C1BD37CDF00F01C75 /* TMEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8495230B1BD37CDF00F01C75 /* TMEditorViewController.m */; };
 		8495230F1BD37CF100F01C75 /* TMGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8495230E1BD37CF100F01C75 /* TMGLViewController.m */; };
@@ -30,6 +32,7 @@
 		84BE5A771BAFE0B000683996 /* TMGLDefaultShaderCompilerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE5A761BAFE0B000683996 /* TMGLDefaultShaderCompilerTest.m */; };
 		84CDC2D81BBBD1360077E78F /* TMGLProgramUniform1i.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CDC2D71BBBD1360077E78F /* TMGLProgramUniform1i.m */; };
 		84CDC2DE1BBC02260077E78F /* TMGLGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CDC2DD1BBC02260077E78F /* TMGLGeometry.m */; };
+		84D90E751BD4EA3F0075EB54 /* TMGLEngineTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D90E741BD4EA3F0075EB54 /* TMGLEngineTest.m */; };
 		84E100931BCFB93B00484C61 /* TMActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E100921BCFB93B00484C61 /* TMActivityIndicator.m */; };
 		84E100951BCFE35D00484C61 /* TMGLDefaultProgramCompilerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E100941BCFE35D00484C61 /* TMGLDefaultProgramCompilerTest.m */; };
 		84E100971BCFE74E00484C61 /* TMGLCachedProgramCompilerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E100961BCFE74E00484C61 /* TMGLCachedProgramCompilerTest.m */; };
@@ -75,6 +78,11 @@
 		844EB6D01BB047F2004D8E1F /* TMGLProgramParameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMGLProgramParameters.h; sourceTree = "<group>"; };
 		844EB6DA1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLDefaultProgramCompiler.h; sourceTree = "<group>"; };
 		844EB6DB1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLDefaultProgramCompiler.m; sourceTree = "<group>"; };
+		8482322D1BD637B0009192EC /* TMGLFeatureManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLFeatureManagerViewController.h; sourceTree = "<group>"; };
+		8482322E1BD637B0009192EC /* TMGLFeatureManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLFeatureManagerViewController.m; sourceTree = "<group>"; };
+		848232331BD682EA009192EC /* TMFeature.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMFeature.h; sourceTree = "<group>"; };
+		848232341BD6837D009192EC /* TMTestFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMTestFeature.h; sourceTree = "<group>"; };
+		848232351BD6837D009192EC /* TMTestFeature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMTestFeature.m; sourceTree = "<group>"; };
 		849523061BCFFF5E00F01C75 /* TMTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMTypes.h; sourceTree = "<group>"; };
 		849523071BD37C0D00F01C75 /* TMGLProgramParametersBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLProgramParametersBuilder.m; sourceTree = "<group>"; };
 		849523091BD37C3700F01C75 /* TMGLProgramParametersBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMGLProgramParametersBuilder.h; sourceTree = "<group>"; };
@@ -98,6 +106,7 @@
 		84CDC2D71BBBD1360077E78F /* TMGLProgramUniform1i.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLProgramUniform1i.m; sourceTree = "<group>"; };
 		84CDC2DC1BBC02260077E78F /* TMGLGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLGeometry.h; sourceTree = "<group>"; };
 		84CDC2DD1BBC02260077E78F /* TMGLGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLGeometry.m; sourceTree = "<group>"; };
+		84D90E741BD4EA3F0075EB54 /* TMGLEngineTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMGLEngineTest.m; path = ToneMapperTests/TMGLEngineTest.m; sourceTree = SOURCE_ROOT; };
 		84E100911BCFB93B00484C61 /* TMActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMActivityIndicator.h; sourceTree = "<group>"; };
 		84E100921BCFB93B00484C61 /* TMActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMActivityIndicator.m; sourceTree = "<group>"; };
 		84E100941BCFE35D00484C61 /* TMGLDefaultProgramCompilerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLDefaultProgramCompilerTest.m; sourceTree = "<group>"; };
@@ -201,6 +210,11 @@
 				8495230B1BD37CDF00F01C75 /* TMEditorViewController.m */,
 				8495230D1BD37CF100F01C75 /* TMGLViewController.h */,
 				8495230E1BD37CF100F01C75 /* TMGLViewController.m */,
+				8482322D1BD637B0009192EC /* TMGLFeatureManagerViewController.h */,
+				8482322E1BD637B0009192EC /* TMGLFeatureManagerViewController.m */,
+				848232331BD682EA009192EC /* TMFeature.h */,
+				848232341BD6837D009192EC /* TMTestFeature.h */,
+				848232351BD6837D009192EC /* TMTestFeature.m */,
 				843DD0ED1BAEF2CC001500F0 /* AppDelegate.h */,
 				843DD0EE1BAEF2CC001500F0 /* AppDelegate.m */,
 				843DD0F31BAEF2CC001500F0 /* Main.storyboard */,
@@ -302,6 +316,7 @@
 		84BE5A751BAFE08300683996 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				84D90E741BD4EA3F0075EB54 /* TMGLEngineTest.m */,
 				84BE5A761BAFE0B000683996 /* TMGLDefaultShaderCompilerTest.m */,
 				84E100941BCFE35D00484C61 /* TMGLDefaultProgramCompilerTest.m */,
 				84E100961BCFE74E00484C61 /* TMGLCachedProgramCompilerTest.m */,
@@ -472,10 +487,12 @@
 				844EB6DC1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.m in Sources */,
 				84CDC2D81BBBD1360077E78F /* TMGLProgramUniform1i.m in Sources */,
 				84EB845F1BBAAC0200EF34B7 /* TMGLProgramParameters.m in Sources */,
+				848232361BD6837D009192EC /* TMTestFeature.m in Sources */,
 				849536921BCB8F3E001C3104 /* TMGLScreenRenderBuffer.m in Sources */,
 				8495230C1BD37CDF00F01C75 /* TMEditorViewController.m in Sources */,
 				8404A0271BBD7F4A00D3C1C5 /* TMGLProgramUniformMatrix4f.m in Sources */,
 				84F7D41C1BCD4A4A008AAA68 /* TMGLCachedProgramCompiler.m in Sources */,
+				8482322F1BD637B0009192EC /* TMGLFeatureManagerViewController.m in Sources */,
 				84EB845A1BBA9C1500EF34B7 /* TMGLEngine.m in Sources */,
 				84EB845D1BBAA9B400EF34B7 /* TMGLProgramAttribute.m in Sources */,
 				84F7D4261BCE51EF008AAA68 /* TMGLImageRenderer.m in Sources */,
@@ -494,6 +511,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84E100951BCFE35D00484C61 /* TMGLDefaultProgramCompilerTest.m in Sources */,
+				84D90E751BD4EA3F0075EB54 /* TMGLEngineTest.m in Sources */,
 				84E100991BCFF07B00484C61 /* TMGLProgramParametersBuilderTest.m in Sources */,
 				84E100971BCFE74E00484C61 /* TMGLCachedProgramCompilerTest.m in Sources */,
 				849523111BD385F100F01C75 /* TMGLProgramParametersTest.m in Sources */,

@@ -33,19 +33,19 @@ describe(@"A Cached Program Compiler", ^{
     program1 = [programCompiler createProgramFromProgramParams:params];
   });
   
-  it(@"Return the same handle for the same program parameters", ^{
+  it(@"Should return the same handle for the same program parameters", ^{
     GLuint program2 = [programCompiler createProgramFromProgramParams:params];
     expect(@(program1)).to(equal(@(program2)));
   });
   
-  it(@"Return the same handle for the same program parameters with an altered uniforms", ^{
+  it(@"Should return the same handle for the same program parameters with an altered uniforms", ^{
     GLuint program1 = [programCompiler createProgramFromProgramParams:params];
     params = [params parametersWithReplacedUniforms:[[NSArray alloc] init]];
     GLuint program2 = [programCompiler createProgramFromProgramParams:params];
     expect(@(program1)).to(equal(@(program2)));
   });
   
-  it(@"Return the same handle for the same program parameters with an altered drawing method", ^{
+  it(@"Should return the same handle for the same program parameters with an altered drawing method", ^{
     GLuint program1 = [programCompiler createProgramFromProgramParams:params];
     [builder setDrawingMethod:GL_TRIANGLE_FAN andVertexCount:1];
     params = [builder build];
@@ -53,7 +53,7 @@ describe(@"A Cached Program Compiler", ^{
     expect(@(program1)).to(equal(@(program2)));
   });
   
-  it(@"Return a different handle for the same program parameters with altered attributes", ^{
+  it(@"Should return a different handle for the same program parameters with altered attributes", ^{
     GLuint program1 = [programCompiler createProgramFromProgramParams:params];
     [builder addAttribute:@"attr3" valuePointer:(GLuint *)1 size:1 type:GL_FLOAT andStride:1];
     params = [builder build];

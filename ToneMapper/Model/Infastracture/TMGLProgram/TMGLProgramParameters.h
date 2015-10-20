@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
                       FragmentShaderName:(NSString *)fragmentShaderName
                               attributes:(NSArray *)attributes unifroms:(NSArray *)uniforms
                            drawingMethod:(GLenum)drawingMethod andVertexCount:(GLuint)vertexCount
- NS_DESIGNATED_INITIALIZER;
+    NS_DESIGNATED_INITIALIZER;
 
 /// Returns a copy of this with its uniforms replaced with \c uniforms.
 - (TMGLProgramParameters *)parametersWithReplacedUniforms:(NSArray *)uniforms;

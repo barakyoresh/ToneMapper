@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Initializer method for \c TMGLImageRenderer object, with \c compiler as its internal program
 /// compiler.
 - (instancetype)initWithProgramCompiler:(id<TMGLProgramCompiler>)programCompiler
-NS_DESIGNATED_INITIALIZER;
+    NS_DESIGNATED_INITIALIZER;
 
 /// Creates a \c UIImage from \c texture. Upon completion \c completionHandler will be called with
 /// \c image as the texture image or nil upon error. Incase of an error \c error will be filled with

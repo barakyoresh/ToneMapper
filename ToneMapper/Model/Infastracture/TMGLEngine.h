@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// via \c programCompiler to be used to compile \c TMGLProgramParameters when calling the
 /// \c useProgram method.
 - (instancetype)initWithProgramCompiler:(id<TMGLProgramCompiler>)programCompiler
-NS_DESIGNATED_INITIALIZER;
+    NS_DESIGNATED_INITIALIZER;
 
 /// Loads \c UIImage to be set as the new workspace asynchronously. Upon completion
 /// \c completionHandler will be called with \c error will be filled appropriately in case of an
@@ -35,7 +35,7 @@ NS_DESIGNATED_INITIALIZER;
 - (void)imageFromWorkspaceWithCompletionHandler:(TMImageErrorBlock)completionHandler;
 
 /// Applies \c filter on the current workspace state texture, causing the current output texture
-/// to be the filtered version of the current workspace state.
+/// drawn on the output buffer to be the filtered version of the current workspace state.
 - (void)useFilter:(id<TMGLFilter>)filter;
 
 /// Draws the internal workspace state to the output buffer specified by \c outputBuffer method.
@@ -48,6 +48,16 @@ NS_DESIGNATED_INITIALIZER;
 /// Adjust the pan offset and zoom scale of the displayed workspace to \c offset and \c scale
 /// respectively. This automatically calls \c draw internally for performace reasons.
 - (void)panOffset:(CGPoint)offset andZoomScale:(float)scale;
+
+/// Adjust the pan offset and of the displayed workspace by \c offset. pass \c YES to \c ended if
+// the offset is reseted and the current value should be falttened and stored.
+- (void)panOffset:(CGPoint)offset ended:(BOOL)ended;
+
+/// Adjust the zoom scale offset and of the displayed workspace by \c offset. pass \c YES to
+/// \c ended if the offset is reseted and the current value should be falttened and stored.
+/// \c panOffset is the center of the zoom gesture, used to make the zoom's focal point in that
+/// point.
+- (void)zoomScaleOffset:(CGFloat)offset focalPoint:(CGPoint)focalPoint ended:(BOOL)ended;
 
 @end
 

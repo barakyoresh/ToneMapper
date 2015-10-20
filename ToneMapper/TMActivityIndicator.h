@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TMActivityIndicator : NSObject
 
 /// Initializer with \c view as the UIView to be displayed on.
-- (instancetype)initWithView:(UIView *)view;
+- (instancetype)initWithView:(UIView *)view NS_DESIGNATED_INITIALIZER;
 
 /// Start animation and show the activity indicator.
 - (void)start;

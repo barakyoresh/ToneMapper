@@ -8,6 +8,8 @@
 #import "TMGLCachedProgramCompiler.h"
 #import "TMGLEngine.h"
 #import "TMActivityIndicator.h"
+#import "TMGLFeatureManagerViewController.h"
+#import "TMTestFeature.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +22,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Loading indicator used when loading images to or from the device memory.
 @property (nonatomic, strong) TMActivityIndicator *loadingIndicator;
 
+/// The \c TMGLEngine object used to handle image editing and drawing.
+@property (strong, nonatomic) TMGLEngine *engine;
+
 @end
 
 @implementation TMEditorViewController
@@ -31,10 +36,9 @@ static NSString * const kAlertDismissText = @"OK";
 
 - (void)viewDidLoad {
   NSLog(@"editor loaded");
-  TMGLEngine *engine =
-    [[TMGLEngine alloc] initWithProgramCompiler:[[TMGLCachedProgramCompiler alloc]
-      initWithShaderCompiler:[[TMGLDefaultShaderCompiler alloc] init]]];
-  self.TMGLviewController = [[TMGLViewController alloc] initWithEngine:engine];
+  self.engine = [[TMGLEngine alloc] initWithProgramCompiler:[[TMGLCachedProgramCompiler alloc]
+                initWithShaderCompiler:[[TMGLDefaultShaderCompiler alloc] init]]];
+  self.TMGLviewController = [[TMGLViewController alloc] initWithEngine:self.engine];
   [self addChildViewController:self.TMGLviewController];
   [self.view addSubview:self.TMGLviewController.view];
   [self.TMGLviewController didMoveToParentViewController:self];
@@ -117,6 +121,18 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:message message:nil delegate:nil
                                         cancelButtonTitle:kAlertDismissText otherButtonTitles:nil];
   [alert show];
+}
+
+#pragma mark -
+#pragma mark Feature flow
+#pragma mark -
+
+- (IBAction)feature
+{
+  TMGLFeatureManagerViewController *featureManagerVC = [[TMGLFeatureManagerViewController alloc]
+                                                       initWithEngine:self.engine andFeature:[[TMTestFeature alloc] init]];
+  featureManagerVC.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+  [self presentViewController:featureManagerVC animated:NO completion:nil];
 }
 
 @end

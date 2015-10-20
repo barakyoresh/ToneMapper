@@ -44,8 +44,11 @@ NS_ASSUME_NONNULL_BEGIN
 /// satisfactory to the user and needs to be set as the current workspace.
 @property (nonatomic, strong) TMGLIdentityFilter *identityProccess;
 
-/// Image renderer for extracting \c UIImage from a \c TMGLTexture object
+/// Image renderer for extracting \c UIImage from a \c TMGLTexture object.
 @property (nonatomic, strong) TMGLImageRenderer *imageRenderer;
+
+/// Translation and scale offset of the output texture compared to workspace display stored a matrix.
+@property (nonatomic) GLKMatrix4 translationScale;
 
 @end
 
@@ -57,6 +60,7 @@ NS_ASSUME_NONNULL_BEGIN
     self.identityProccess = [[TMGLIdentityFilter alloc] initWithProgramCompiler:programCompiler];
     self.imageRenderer = [[TMGLImageRenderer alloc] initWithProgramCompiler:programCompiler];
     self.workspaceInspectorProgram = [TMGLProgramParametersBuilder identityProgramParameters];
+    [self resetTranslationScale];
   }
   return self;
 }
@@ -84,6 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
     if (texture) {
       self.inputTexture = texture;
       self.outputTexture = texture;
+      [self resetTranslationScale];
       [self updateWorkspaceInspectorMVPMatrix:[self aspectRatioTransformationMatrix]];
       completionHandler(nil);
     } else {
@@ -112,6 +117,35 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Display
 #pragma mark -
 
+- (void)resetTranslationScale {
+  self.translationScale = GLKMatrix4Identity;
+}
+
+- (void)panOffset:(CGPoint)offset ended:(BOOL)ended {
+  GLKMatrix4 translationScale = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(offset.x, offset.y, 0),
+                                                   self.translationScale);
+  
+  [self updateWorkspaceInspectorMVPMatrix:
+    GLKMatrix4Multiply(translationScale, [self aspectRatioTransformationMatrix])];
+  if (ended) {
+    self.translationScale = translationScale;
+  }
+}
+
+- (void)zoomScaleOffset:(CGFloat)offset focalPoint:(CGPoint)focalPoint ended:(BOOL)ended {
+  GLKMatrix4 translationScale =
+    GLKMatrix4Multiply(GLKMatrix4MakeTranslation(focalPoint.x, focalPoint.y, 0),
+                       self.translationScale);
+  translationScale = GLKMatrix4Multiply(GLKMatrix4MakeScale(1 + offset, 1 + offset, 1),
+                                        translationScale);
+  translationScale = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(-focalPoint.x, -focalPoint.y, 0),
+                                        translationScale);
+  [self updateWorkspaceInspectorMVPMatrix:GLKMatrix4Multiply(translationScale,
+                                                          [self aspectRatioTransformationMatrix])];
+  if (ended) {
+    self.translationScale = translationScale;
+  }
+}
 
 - (void)outputBuffer:(id<TMGLBuffer> __nonnull)outputBuffer {
   self.outputBuffer = outputBuffer;

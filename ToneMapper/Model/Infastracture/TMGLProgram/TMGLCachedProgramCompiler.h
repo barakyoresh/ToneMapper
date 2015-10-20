@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Designated intializer with \c TMGLShaderCompiler object injected via \c shaderCompiler
 /// parameter.
 - (instancetype)initWithShaderCompiler:(id <TMGLShaderCompiler>)shaderCompiler
-NS_DESIGNATED_INITIALIZER;
+    NS_DESIGNATED_INITIALIZER;
 
 @end
 

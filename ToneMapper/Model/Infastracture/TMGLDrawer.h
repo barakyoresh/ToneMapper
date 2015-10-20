@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Initializer method for \c TMGLRenderer object, with \c compiler as it's internal program
 /// compiler.
 - (instancetype)initWithProgramCompiler:(id<TMGLProgramCompiler>)programCompiler
-NS_DESIGNATED_INITIALIZER;
+    NS_DESIGNATED_INITIALIZER;
 
 /// Draws \c texture to \c outputFrameBuffer using compiled \c parameters compiled with
 /// \c compiler.

@@ -1,0 +1,60 @@
+// Copyright (c) 2015 Lightricks. All rights reserved.
+// Created by Barak Yoresh.
+
+@import Quick;
+@import Nimble;
+
+#import "TMGLDefaultShaderCompiler.h"
+#import <OpenGLES/ES2/gl.h>
+
+QuickSpecBegin(DefaultShaderCompilerSpec)
+
+describe(@"a default shader compiler", ^{
+  TMGLDefaultShaderCompiler *shaderCompiler = [[TMGLDefaultShaderCompiler alloc] init];
+  
+  it(@"should return 0 for illegal shader types", ^{
+    expect(@([shaderCompiler createShaderType:GL_ZERO
+                                       fromPath:@"non_existing_path"
+                                   withFileType:@"vsh"])).to(equal(@0));
+  });
+  
+  it(@"should return non-zero for legal shader types", ^{
+    expect(@([shaderCompiler createShaderType:GL_VERTEX_SHADER
+                                       fromPath:@"TMGLIdentityProgram"
+                                   withFileType:@"vsh"])).toNot(equal(@0));
+  });
+  
+  it(@"should return 0 for bad file paths", ^{
+    expect(@([shaderCompiler createShaderType:GL_VERTEX_SHADER
+                               fromPath:@"non_existing_path"
+                           withFileType:@"vsh"])).to(equal(@0));
+  });
+  
+  it(@"should return non-zero for good file paths", ^{
+    expect(@([shaderCompiler createShaderType:GL_VERTEX_SHADER
+                                       fromPath:@"TMGLIdentityProgram"
+                                   withFileType:@"vsh"])).toNot(equal(@0));
+  });
+  
+  
+  it(@"should return 0 for bad file path extensions", ^{
+    expect(@([shaderCompiler createShaderType:GL_VERTEX_SHADER
+                                       fromPath:@"non_existing_path"
+                                   withFileType:@"exe"])).to(equal(@0));
+  });
+  
+  it(@"should return non-zero for good file path extensions", ^{
+    expect(@([shaderCompiler createShaderType:GL_VERTEX_SHADER
+                                       fromPath:@"TMGLIdentityProgram"
+                                   withFileType:@"vsh"])).toNot(equal(@0));
+  });
+  
+  it(@"should return 0 for bad file path extension and type combinations", ^{
+    expect(@([shaderCompiler createShaderType:GL_VERTEX_SHADER
+                                       fromPath:@"TMGLIdentityProgram"
+                                   withFileType:@"fsh"])).to(equal(@0));
+  });
+
+});
+
+QuickSpecEnd

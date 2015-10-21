@@ -1,0 +1,28 @@
+// Copyright (c) 2015 Lightricks. All rights reserved.
+// Created by Barak Yoresh.
+
+#import "TMGLProgramParameters.h"
+
+#import <Foundation/Foundation.h>
+
+#import "TMGLProgramCompiler.h"
+
+@protocol TMGLShaderCompiler;
+
+NS_ASSUME_NONNULL_BEGIN
+
+/// Factory class used to compile an opengl program with the contents of a \c TMGLProgramParameters
+/// object.
+@interface TMGLDefaultProgramCompiler : NSObject <TMGLProgramCompiler>
+
+/// Set base initializer as unavilable.
+- (instancetype)init NS_UNAVAILABLE;
+
+/// Designated intializer with \c TMGLShaderCompiler object injected via \c shaderCompiler
+/// parameter.
+- (instancetype)initWithShaderCompiler:(id <TMGLShaderCompiler>)shaderCompiler
+    NS_DESIGNATED_INITIALIZER;
+
+@end
+
+NS_ASSUME_NONNULL_END

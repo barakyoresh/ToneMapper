@@ -1,0 +1,19 @@
+PODS:
+  - Nimble (1.0.0)
+  - OCHamcrest (4.3.0)
+  - OCMockito (1.4.0):
+    - OCHamcrest (~> 4.0)
+  - Quick (0.3.1)
+
+DEPENDENCIES:
+  - Nimble (~> 1.0.0)
+  - OCMockito (~> 1.0)
+  - Quick (~> 0.3.0)
+
+SPEC CHECKSUMS:
+  Nimble: 8bee528e5fcc403653076545db562d2b5db7bb87
+  OCHamcrest: cd63d27f48a266d4412c0b295b01b8f0940efa81
+  OCMockito: 4981140c9a9ec06c31af40f636e3c0f25f27e6b2
+  Quick: 824572d3d198d51e52cf4aa722cebf7e59952a35
+
+COCOAPODS: 0.38.2

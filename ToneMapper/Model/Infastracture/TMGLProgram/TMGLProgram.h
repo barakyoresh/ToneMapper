@@ -5,6 +5,8 @@
 
 #import <OpenGLES/ES2/gl.h>
 
+@protocol TMGLProgramUniform;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /// Wrapper to an opengl program handle, enabling encapsulated usage. A \c TMGLProgram should be
@@ -22,8 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Uses this program, setting it to the currently used program in the opengl enviorment.
 - (void)use;
 
-/// opengl handle to the compiled program.
-@property (readonly, nonatomic) GLuint handle;
+/// Sends \c unifrom to the currently used program with at the location of \c uniform in this
+/// program.
+- (void)sendUniform:(id<TMGLProgramUniform>)uniform;
 
 @end
 

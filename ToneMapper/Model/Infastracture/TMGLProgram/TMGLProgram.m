@@ -3,7 +3,16 @@
 
 #import "TMGLProgram.h"
 
+#import "TMGLProgramUniform.h"
+
 NS_ASSUME_NONNULL_BEGIN
+
+@interface TMGLProgram ()
+
+/// Opengl handle to the compiled program.
+@property (readonly, nonatomic) GLuint handle;
+
+@end
 
 @implementation TMGLProgram
 
@@ -18,10 +27,17 @@ NS_ASSUME_NONNULL_BEGIN
   glUseProgram(self.handle);
 }
 
+- (void)sendUniform:(id<TMGLProgramUniform>)uniform {
+  [uniform sendAtLocation:glGetUniformLocation(self.handle,
+      [uniform.name cStringUsingEncoding:NSUTF8StringEncoding])];
+}
+
 - (void)dealloc {
   glDeleteProgram(self.handle);
 }
 
 @end
+
+
 
 NS_ASSUME_NONNULL_END

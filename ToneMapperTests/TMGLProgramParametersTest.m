@@ -2,34 +2,43 @@
 // Created by Barak Yoresh.
 
 #import "TMGLProgramParameters.h"
+#import "TMGLProgramUniform.h"
 
 @import Quick;
 @import Nimble;
 
-//#define HC_SHORTHAND
-//#import <OCHamcrest/OCHamcrest.h>
-//
-//#define MOCKITO_SHORTHAND
-//#import <OCMockito/OCMockito.h>
+#define HC_SHORTHAND
+#import <OCHamcrest/OCHamcrest.h>
+
+#define MOCKITO_SHORTHAND
+#import <OCMockito/OCMockito.h>
 
 QuickSpecBegin(ProgramParametersSpec)
 
 describe(@"Program Parameters", ^{
-  NSArray *attributes = [[NSArray alloc] init];
-  //id<TMGLProgramUniform> uniform = MKTMockProtocol(@protocol(TMGLProgramUniform));
-  //[MKTGiven([uniform name]) willReturn:@"uinf1"];
-  NSArray *uniforms = [[NSArray alloc] init];
-  //NSLog(@"uniform: %@", uniform);
-
-  TMGLProgramParameters *programParameters =
-  [[TMGLProgramParameters alloc] initWithVertexShaderName:@"vShader" fragmentShaderName:@"fShader"
-                                               attributes:attributes unifroms:uniforms
-                                            drawingMethod:GL_TRIANGLES andVertexCount:1];
+  __block TMGLProgramParameters *programParameters;
+  __block NSArray *attributes;
+  __block NSArray *uniforms;
+  __block id<TMGLProgramUniform> uniform;
+  
+  beforeEach(^{
+    attributes = [[NSArray alloc] init];
+    uniform = MKTMockProtocol(@protocol(TMGLProgramUniform));
+    [MKTGiven([uniform name]) willReturn:@"unif1"];
+    uniforms = @[uniform];
+    programParameters = [[TMGLProgramParameters alloc] initWithVertexShaderName:@"vShader"
+                                                             fragmentShaderName:@"fShader"
+                                                                     attributes:attributes
+                                                                       unifroms:uniforms
+                                                                  drawingMethod:GL_TRIANGLES
+                                                                 andVertexCount:1];
+  });
+  
   
   context(@"parameters", ^{
     
     it(@"Should retain its vertexShaderName value", ^{
-          expect([programParameters vertexShaderName]).to(equal(@"vShader"));
+      expect([programParameters vertexShaderName]).to(equal(@"vShader"));
     });
     
     it(@"Should retain its fragmentShaderName value", ^{
@@ -41,7 +50,7 @@ describe(@"Program Parameters", ^{
     });
     
     it(@"Should retain its uniforms value", ^{
-      expect([programParameters uniforms]).to(equal(uniforms));
+      expect([((id<TMGLProgramUniform>)[[programParameters uniforms] firstObject]) name]).to(equal([((id<TMGLProgramUniform>)[uniforms firstObject]) name]));
     });
     
     it(@"Should retain its drawingMethod value", ^{
@@ -63,10 +72,10 @@ describe(@"Program Parameters", ^{
     });
     
     it(@"Should be able to replace a single uniform", ^{
-//      id<TMGLProgramUniform> unifrom2 = MKTMockProtocol(@protocol(TMGLProgramUniform));
-//      [MKTGiven([uniform name]) willReturn:@"uinf1"];
-//      TMGLProgramParameters *programParameters2 = [programParameters parametersWithReplacedUniform:unifrom2];
-//      expect([[programParameters2 uniforms] firstObject]).to(equal(unifrom2));
+      id<TMGLProgramUniform> uniform2 = MKTMockProtocol(@protocol(TMGLProgramUniform));
+      [MKTGiven([uniform2 name]) willReturn:@"unif1"];
+      TMGLProgramParameters *programParameters2 = [programParameters parametersWithReplacedUniform:uniform2];
+      expect([[programParameters2 uniforms] firstObject]).to(equal(uniform2));
     });
     
   });

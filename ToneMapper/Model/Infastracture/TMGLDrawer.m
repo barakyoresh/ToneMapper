@@ -33,7 +33,7 @@ static const float kRed = 0.30f, kGreen = 0.30f, kBlue = 0.30f, kAlpha = 1.0f;
 }
 
 - (void)drawTexture:(TMGLTexture *)texture toFrameBuffer:(id<TMGLBuffer>)frameBuffer
-withProgramParameters:(TMGLProgramParameters *)parameters {
+    withProgramParameters:(TMGLProgramParameters *)parameters {
   glViewport(0, 0, texture.size.width, texture.size.height);
   
   [frameBuffer bind];
@@ -52,7 +52,7 @@ withProgramParameters:(TMGLProgramParameters *)parameters {
   [texture bind];
   
   for (id<TMGLProgramUniform> uniform in parameters.uniforms) {
-    [uniform sendUnifrom:program];
+    [program sendUniform:uniform];
   }
   
   if (texture) {

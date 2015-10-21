@@ -70,8 +70,9 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Equality
 #pragma mark -
 
-/// Cached equals created to check if this  \c TMGLProgramParameters is equal as far as the cache
-/// is concerned to \c other.
+/// Override isEqual to check only re-compile worthy changes to this \c TMGLProgramParameters.
+/// This is implemented in order to make comparing \c TMGLProgramParameters will result in
+/// inequality only if a corresponding compiled \c TMGLProgram will result in a different program.
 - (BOOL)isEqual:(id)object {
   if (self == object) {
     return YES;

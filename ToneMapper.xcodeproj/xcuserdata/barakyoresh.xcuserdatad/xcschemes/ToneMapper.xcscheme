@@ -20,20 +20,6 @@
                ReferencedContainer = "container:ToneMapper.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "843DD0FE1BAEF2CC001500F0"
-               BuildableName = "ToneMapperTests.xctest"
-               BlueprintName = "ToneMapperTests"
-               ReferencedContainer = "container:ToneMapper.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

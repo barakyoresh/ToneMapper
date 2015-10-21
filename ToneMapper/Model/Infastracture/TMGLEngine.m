@@ -25,9 +25,6 @@ NS_ASSUME_NONNULL_BEGIN
 /// Parameters of the internal workspace inspection program.
 @property (strong, nonatomic) TMGLProgramParameters *workspaceInspectorProgram;
 
-/// External frame buffer used as output in the draw cycle.
-@property (strong, nonatomic) id <TMGLBuffer> outputBuffer;
-
 /// Size of last bound view according to usage of the viewCreatedOfSize:(CGSize)size method.
 @property (readonly, nonatomic) CGSize outputSize;
 
@@ -115,11 +112,6 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark -
 #pragma mark Display
 #pragma mark -
-
-
-- (void)outputBuffer:(id<TMGLBuffer> __nonnull)outputBuffer {
-  self.outputBuffer = outputBuffer;
-}
 
 - (CGSize)outputSize {
   if (self.outputBuffer) {

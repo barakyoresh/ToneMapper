@@ -42,13 +42,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// Draws the internal workspace state to the output buffer specified by \c outputBuffer method.
 - (void)draw;
 
-/// Sets the output buffer of the engine's subsequent draws as \c outputBuffer. \c outputBuffer's
-/// size property will also determine the aspect ratio correction made from image size to display.
-- (void)outputBuffer:(id <TMGLBuffer>)outputBuffer;
-
 /// Adjust the pan offset and zoom scale of the displayed workspace to \c offset and \c scale
 /// respectively. This automatically calls \c draw internally for performace reasons.
 - (void)panOffset:(CGPoint)offset andZoomScale:(float)scale;
+
+/// Determines the output buffer of the engine's subsequent draws as \c outputBuffer.
+/// \c outputBuffer's size property will also determine the aspect ratio correction made from image
+/// size to display.
+@property (strong, nonatomic) id<TMGLBuffer> outputBuffer;
 
 @end
 

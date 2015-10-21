@@ -27,10 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
   return self;
 }
 
-- (void)sendUnifrom:(TMGLProgram *)program {
-  glUniformMatrix4fv(glGetUniformLocation(program.handle,
-                                          [self.name cStringUsingEncoding:NSUTF8StringEncoding]),
-                                          1, FALSE, self.valuePointer);
+- (void)sendAtLocation:(GLuint)location {
+  glUniformMatrix4fv(location, 1, FALSE, self.valuePointer);
 }
 
 - (void)dealloc {

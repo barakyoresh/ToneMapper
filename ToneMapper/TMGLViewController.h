@@ -31,8 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Loads \c UIImage to be displayed in the view asynchronously. Upon completion
 /// \c completionHandler will be called with \c error will be filled appropriately in case of an
 /// error and nil otherwise.
-- (void)loadImage:(UIImage *)image
-completionHandler:(TMErrorBlock)completionHandler;
+- (void)loadImage:(UIImage *)image completionHandler:(TMErrorBlock)completionHandler;
 
 /// Request for the currently edited version of the image displayed in this view controller's view while
 /// ignoring current zoom and pan state. Upon completion \c completionHandler will be

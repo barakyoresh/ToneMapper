@@ -5,7 +5,7 @@
 #import "TMGLDefaultShaderCompiler.h"
 #import "TMGLProgramParametersBuilder.h"
 #import "TMGLProgramParameters.h"
-
+#import "TMGLProgram.h"
 
 @import Quick;
 @import Nimble;
@@ -18,7 +18,7 @@ describe(@"A Cached Program Compiler", ^{
                                                                init]];
   __block TMGLProgramParametersBuilder *builder;
   __block TMGLProgramParameters *params;
-  __block GLuint program1;
+  __block TMGLProgram *program1;
   
   beforeEach(^{
     GLuint unif = 1;
@@ -35,32 +35,32 @@ describe(@"A Cached Program Compiler", ^{
     program1 = [programCompiler createProgramFromProgramParams:params];
   });
   
-  it(@"Return the same handle for the same program parameters", ^{
-    GLuint program2 = [programCompiler createProgramFromProgramParams:params];
-    expect(@(program1)).to(equal(@(program2)));
+  it(@"Should return the same handle for the same program parameters", ^{
+    TMGLProgram *program2 = [programCompiler createProgramFromProgramParams:params];
+    expect(program1).to(equal(program2));
   });
   
-  it(@"Return the same handle for the same program parameters with an altered uniforms", ^{
-    GLuint program1 = [programCompiler createProgramFromProgramParams:params];
+  it(@"Should return the same handle for the same program parameters with an altered uniforms", ^{
+    TMGLProgram *program1 = [programCompiler createProgramFromProgramParams:params];
     params = [params parametersWithReplacedUniforms:[[NSArray alloc] init]];
-    GLuint program2 = [programCompiler createProgramFromProgramParams:params];
-    expect(@(program1)).to(equal(@(program2)));
+    TMGLProgram *program2 = [programCompiler createProgramFromProgramParams:params];
+    expect(program1).to(equal(program2));
   });
   
-  it(@"Return the same handle for the same program parameters with an altered drawing method", ^{
-    GLuint program1 = [programCompiler createProgramFromProgramParams:params];
+  it(@"Should return the same handle for the same program parameters with an altered drawing method", ^{
+    TMGLProgram *program1 = [programCompiler createProgramFromProgramParams:params];
     [builder setDrawingMethod:GL_TRIANGLE_FAN andVertexCount:1];
     params = [builder build];
-    GLuint program2 = [programCompiler createProgramFromProgramParams:params];
-    expect(@(program1)).to(equal(@(program2)));
+    TMGLProgram *program2 = [programCompiler createProgramFromProgramParams:params];
+    expect(program1).to(equal(program2));
   });
   
-  it(@"Return a different handle for the same program parameters with altered attributes", ^{
-    GLuint program1 = [programCompiler createProgramFromProgramParams:params];
+  it(@"Should return a different handle for the same program parameters with altered attributes", ^{
+    TMGLProgram *program1 = [programCompiler createProgramFromProgramParams:params];
     [builder addAttribute:@"attr3" valuePointer:(GLuint *)1 size:1 type:GL_FLOAT andStride:1];
     params = [builder build];
-    GLuint program2 = [programCompiler createProgramFromProgramParams:params];
-    expect(@(program1)).toNot(equal(@(program2)));
+    TMGLProgram *program2 = [programCompiler createProgramFromProgramParams:params];
+    expect(program1).toNot(equal(program2));
   });
   
 });

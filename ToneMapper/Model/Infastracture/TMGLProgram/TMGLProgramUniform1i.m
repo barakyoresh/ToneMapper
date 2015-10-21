@@ -23,9 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
   return self;
 }
 
-- (void)sendUnifrom:(TMGLProgram *)program {
-  glUniform1i(glGetUniformLocation(program.handle, [self.name cStringUsingEncoding:NSUTF8StringEncoding]),
-              self.value);
+- (void)sendAtLocation:(GLuint)location {
+  glUniform1i(location, self.value);
 }
 
 @end

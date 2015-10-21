@@ -68,7 +68,7 @@ static const float kMinZoomScale = 0.2;
   if (!self.glkView) {
     [self setupGLKView];
     [self enableScrolling];
-    [self.engine outputBuffer:[[TMGLScreenRenderBuffer alloc] initWithGLKView:self.glkView]];
+    self.engine.outputBuffer = [[TMGLScreenRenderBuffer alloc] initWithGLKView:self.glkView];
   }
   
   if (!self.loadingIndicator) {

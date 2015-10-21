@@ -12,8 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Protocol that all opengl uniforms must conform to.
 @protocol TMGLProgramUniform <NSObject>
 
-/// Sends this uniform to \c program using the appropriate \c glUniform method.
-- (void)sendUnifrom:(TMGLProgram *)program;
+/// Sends this uniform to to currently used program using the appropriate \c glUniform method.
+- (void)sendAtLocation:(GLuint)location;
 
 /// This uniform's name, matching the name in the shader file.
 - (NSString *)name;

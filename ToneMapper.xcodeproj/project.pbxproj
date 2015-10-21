@@ -11,6 +11,8 @@
 		8404A0231BBD5DDA00D3C1C5 /* TMGLIdentityProgram.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8404A0211BBD5DDA00D3C1C5 /* TMGLIdentityProgram.fsh */; };
 		8404A0241BBD5DDA00D3C1C5 /* TMGLIdentityProgram.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 8404A0221BBD5DDA00D3C1C5 /* TMGLIdentityProgram.vsh */; };
 		8404A0271BBD7F4A00D3C1C5 /* TMGLProgramUniformMatrix4f.m in Sources */ = {isa = PBXBuildFile; fileRef = 8404A0261BBD7F4A00D3C1C5 /* TMGLProgramUniformMatrix4f.m */; };
+		84135A411BD7CF9900004A0E /* TMGLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 84135A401BD7CF9900004A0E /* TMGLProgram.m */; };
+		84135A441BD7CFD500004A0E /* TMGLProgramCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84135A431BD7CFD500004A0E /* TMGLProgramCacheManager.m */; };
 		843C99671BAEFD0900942B90 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843C99661BAEFD0900942B90 /* GLKit.framework */; };
 		843C99691BAEFD0E00942B90 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843C99681BAEFD0E00942B90 /* OpenGLES.framework */; };
 		843DD0EC1BAEF2CC001500F0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 843DD0EB1BAEF2CC001500F0 /* main.m */; };
@@ -19,8 +21,6 @@
 		843DD0F71BAEF2CC001500F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843DD0F61BAEF2CC001500F0 /* Images.xcassets */; };
 		843DD0FA1BAEF2CC001500F0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843DD0F81BAEF2CC001500F0 /* LaunchScreen.xib */; };
 		844EB6DC1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 844EB6DB1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.m */; };
-		848232391BD7873A009192EC /* TMGLProgramCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 848232381BD7873A009192EC /* TMGLProgramCacheManager.m */; };
-		8482323C1BD7A7C4009192EC /* TMGLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 8482323B1BD7A7C4009192EC /* TMGLProgram.m */; };
 		849523081BD37C0D00F01C75 /* TMGLProgramParametersBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 849523071BD37C0D00F01C75 /* TMGLProgramParametersBuilder.m */; };
 		8495230C1BD37CDF00F01C75 /* TMEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8495230B1BD37CDF00F01C75 /* TMEditorViewController.m */; };
 		8495230F1BD37CF100F01C75 /* TMGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8495230E1BD37CF100F01C75 /* TMGLViewController.m */; };
@@ -32,6 +32,7 @@
 		84BE5A771BAFE0B000683996 /* TMGLDefaultShaderCompilerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84BE5A761BAFE0B000683996 /* TMGLDefaultShaderCompilerTest.m */; };
 		84CDC2D81BBBD1360077E78F /* TMGLProgramUniform1i.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CDC2D71BBBD1360077E78F /* TMGLProgramUniform1i.m */; };
 		84CDC2DE1BBC02260077E78F /* TMGLGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CDC2DD1BBC02260077E78F /* TMGLGeometry.m */; };
+		84D90E751BD4EA3F0075EB54 /* TMGLEngineTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84D90E741BD4EA3F0075EB54 /* TMGLEngineTest.m */; };
 		84E100931BCFB93B00484C61 /* TMActivityIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E100921BCFB93B00484C61 /* TMActivityIndicator.m */; };
 		84E100951BCFE35D00484C61 /* TMGLDefaultProgramCompilerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E100941BCFE35D00484C61 /* TMGLDefaultProgramCompilerTest.m */; };
 		84E100971BCFE74E00484C61 /* TMGLCachedProgramCompilerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E100961BCFE74E00484C61 /* TMGLCachedProgramCompilerTest.m */; };
@@ -62,6 +63,10 @@
 		8404A0221BBD5DDA00D3C1C5 /* TMGLIdentityProgram.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = TMGLIdentityProgram.vsh; sourceTree = "<group>"; };
 		8404A0251BBD7F4A00D3C1C5 /* TMGLProgramUniformMatrix4f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLProgramUniformMatrix4f.h; sourceTree = "<group>"; };
 		8404A0261BBD7F4A00D3C1C5 /* TMGLProgramUniformMatrix4f.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLProgramUniformMatrix4f.m; sourceTree = "<group>"; };
+		84135A3F1BD7CF9900004A0E /* TMGLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLProgram.h; sourceTree = "<group>"; };
+		84135A401BD7CF9900004A0E /* TMGLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLProgram.m; sourceTree = "<group>"; };
+		84135A421BD7CFD500004A0E /* TMGLProgramCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLProgramCacheManager.h; sourceTree = "<group>"; };
+		84135A431BD7CFD500004A0E /* TMGLProgramCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLProgramCacheManager.m; sourceTree = "<group>"; };
 		843C99661BAEFD0900942B90 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		843C99681BAEFD0E00942B90 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		843DD0E61BAEF2CC001500F0 /* ToneMapper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToneMapper.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,10 +82,6 @@
 		844EB6D01BB047F2004D8E1F /* TMGLProgramParameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMGLProgramParameters.h; sourceTree = "<group>"; };
 		844EB6DA1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLDefaultProgramCompiler.h; sourceTree = "<group>"; };
 		844EB6DB1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLDefaultProgramCompiler.m; sourceTree = "<group>"; };
-		848232371BD7873A009192EC /* TMGLProgramCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLProgramCacheManager.h; sourceTree = "<group>"; };
-		848232381BD7873A009192EC /* TMGLProgramCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLProgramCacheManager.m; sourceTree = "<group>"; };
-		8482323A1BD7A7C4009192EC /* TMGLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLProgram.h; sourceTree = "<group>"; };
-		8482323B1BD7A7C4009192EC /* TMGLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLProgram.m; sourceTree = "<group>"; };
 		849523061BCFFF5E00F01C75 /* TMTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMTypes.h; sourceTree = "<group>"; };
 		849523071BD37C0D00F01C75 /* TMGLProgramParametersBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLProgramParametersBuilder.m; sourceTree = "<group>"; };
 		849523091BD37C3700F01C75 /* TMGLProgramParametersBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMGLProgramParametersBuilder.h; sourceTree = "<group>"; };
@@ -104,6 +105,7 @@
 		84CDC2D71BBBD1360077E78F /* TMGLProgramUniform1i.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLProgramUniform1i.m; sourceTree = "<group>"; };
 		84CDC2DC1BBC02260077E78F /* TMGLGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLGeometry.h; sourceTree = "<group>"; };
 		84CDC2DD1BBC02260077E78F /* TMGLGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLGeometry.m; sourceTree = "<group>"; };
+		84D90E741BD4EA3F0075EB54 /* TMGLEngineTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TMGLEngineTest.m; path = ToneMapperTests/TMGLEngineTest.m; sourceTree = SOURCE_ROOT; };
 		84E100911BCFB93B00484C61 /* TMActivityIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMActivityIndicator.h; sourceTree = "<group>"; };
 		84E100921BCFB93B00484C61 /* TMActivityIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMActivityIndicator.m; sourceTree = "<group>"; };
 		84E100941BCFE35D00484C61 /* TMGLDefaultProgramCompilerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLDefaultProgramCompilerTest.m; sourceTree = "<group>"; };
@@ -275,15 +277,15 @@
 			children = (
 				8404A0201BBD5DA300D3C1C5 /* Internal Shaders */,
 				849536941BCBC53D001C3104 /* TMGLShaderCompiler.h */,
-				8482323A1BD7A7C4009192EC /* TMGLProgram.h */,
-				8482323B1BD7A7C4009192EC /* TMGLProgram.m */,
 				84BE5A721BAFDDE900683996 /* TMGLDefaultShaderCompiler.h */,
 				84BE5A731BAFDDE900683996 /* TMGLDefaultShaderCompiler.m */,
+				84135A3F1BD7CF9900004A0E /* TMGLProgram.h */,
+				84135A401BD7CF9900004A0E /* TMGLProgram.m */,
 				84F7D4171BCBCA41008AAA68 /* TMGLProgramCompiler.h */,
+				84135A421BD7CFD500004A0E /* TMGLProgramCacheManager.h */,
+				84135A431BD7CFD500004A0E /* TMGLProgramCacheManager.m */,
 				844EB6DA1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.h */,
 				844EB6DB1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.m */,
-				848232371BD7873A009192EC /* TMGLProgramCacheManager.h */,
-				848232381BD7873A009192EC /* TMGLProgramCacheManager.m */,
 				84F7D41A1BCD4A4A008AAA68 /* TMGLCachedProgramCompiler.h */,
 				84F7D41B1BCD4A4A008AAA68 /* TMGLCachedProgramCompiler.m */,
 				849523091BD37C3700F01C75 /* TMGLProgramParametersBuilder.h */,
@@ -312,6 +314,7 @@
 		84BE5A751BAFE08300683996 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				84D90E741BD4EA3F0075EB54 /* TMGLEngineTest.m */,
 				84BE5A761BAFE0B000683996 /* TMGLDefaultShaderCompilerTest.m */,
 				84E100941BCFE35D00484C61 /* TMGLDefaultProgramCompilerTest.m */,
 				84E100961BCFE74E00484C61 /* TMGLCachedProgramCompilerTest.m */,
@@ -476,10 +479,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				84CDC2DE1BBC02260077E78F /* TMGLGeometry.m in Sources */,
-				848232391BD7873A009192EC /* TMGLProgramCacheManager.m in Sources */,
+				84135A441BD7CFD500004A0E /* TMGLProgramCacheManager.m in Sources */,
 				84F7D4231BCE4423008AAA68 /* TMGLIdentityFilter.m in Sources */,
 				843DD0EF1BAEF2CC001500F0 /* AppDelegate.m in Sources */,
 				84A60D311BC4FBE2002FB254 /* TMGLTextureFrameBuffer.m in Sources */,
+				84135A411BD7CF9900004A0E /* TMGLProgram.m in Sources */,
 				844EB6DC1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.m in Sources */,
 				84CDC2D81BBBD1360077E78F /* TMGLProgramUniform1i.m in Sources */,
 				84EB845F1BBAAC0200EF34B7 /* TMGLProgramParameters.m in Sources */,
@@ -494,7 +498,6 @@
 				8495368E1BCA931A001C3104 /* TMGLTexture.m in Sources */,
 				84E100931BCFB93B00484C61 /* TMActivityIndicator.m in Sources */,
 				849523081BD37C0D00F01C75 /* TMGLProgramParametersBuilder.m in Sources */,
-				8482323C1BD7A7C4009192EC /* TMGLProgram.m in Sources */,
 				8495230F1BD37CF100F01C75 /* TMGLViewController.m in Sources */,
 				843DD0EC1BAEF2CC001500F0 /* main.m in Sources */,
 				84BE5A741BAFDDE900683996 /* TMGLDefaultShaderCompiler.m in Sources */,
@@ -506,6 +509,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				84E100951BCFE35D00484C61 /* TMGLDefaultProgramCompilerTest.m in Sources */,
+				84D90E751BD4EA3F0075EB54 /* TMGLEngineTest.m in Sources */,
 				84E100991BCFF07B00484C61 /* TMGLProgramParametersBuilderTest.m in Sources */,
 				84E100971BCFE74E00484C61 /* TMGLCachedProgramCompilerTest.m in Sources */,
 				849523111BD385F100F01C75 /* TMGLProgramParametersTest.m in Sources */,

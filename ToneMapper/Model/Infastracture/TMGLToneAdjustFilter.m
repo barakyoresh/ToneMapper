@@ -27,9 +27,7 @@ static const float kDefaultGlobalContrast = 0.5f;
 static const float kDefaultSaturation = 0.25f;
 static const float kDefaultTint = 0.5f;
 static const float kDefaultTemprature = 0.5f;
-static const float kTempratureUWeight = 0.7f;
-static const float kTempratureVWeight = -0.3f;
-static const float kTempratureDampenWeight = 0.3f;
+static const float kChromaDampenWeight = 0.25f;
 static float const kRGBAtoYUVA[] = {0.299, 0.587, 0.114, 0,
                                     -0.14713, -0.28886, 0.436, 0,
                                     0.615, -0.51499, -0.10001, 0,
@@ -169,8 +167,9 @@ static float const kYUVAtoRGBA[] = {1, 0, 1.13983, 0,
 }
 
 - (GLKMatrix4)makeTintMatrix {
-  float tint = (self.tint * 2) - 1;
-  return GLKMatrix4MakeTranslation(tint, tint, tint);
+  float tint = (self.tint - 0.5) * kChromaDampenWeight;
+  return GLKMatrix4Multiply([self RGBAFromYUVA],
+         GLKMatrix4Multiply(GLKMatrix4MakeTranslation(0, tint, tint), [self YUVAFromRGBA]));
 }
 
 #pragma mark -
@@ -182,11 +181,9 @@ static float const kYUVAtoRGBA[] = {1, 0, 1.13983, 0,
 }
 
 - (GLKMatrix4)makeTempratureMatrix {
-  float temp =  ((self.temprature * 2) - 1) * -kTempratureDampenWeight;
+  float temp =  (self.temprature - 0.5) * -kChromaDampenWeight;
   return GLKMatrix4Multiply([self RGBAFromYUVA],
-         GLKMatrix4Multiply(GLKMatrix4MakeTranslation(0, temp * kTempratureUWeight,
-                                                      temp * kTempratureVWeight),
-                            [self YUVAFromRGBA]));
+         GLKMatrix4Multiply(GLKMatrix4MakeTranslation(0, temp, -temp), [self YUVAFromRGBA]));
 }
 
 #pragma mark -

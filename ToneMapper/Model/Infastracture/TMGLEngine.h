@@ -28,6 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Loads \c UIImage to be set as the new workspace asynchronously. Upon completion
 /// \c completionHandler will be called with \c error will be filled appropriately in case of an
 /// error and nil otherwise.
+/// Texture 0 is set by the engine to be the input texture image.
 - (void)loadImage:(UIImage *)image completionHandler:(TMErrorBlock)completionHandler;
 
 /// Request for the current workspace as a \c UIImage. Upon completion \c completionHandler will be
@@ -36,15 +37,27 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)imageFromWorkspaceWithCompletionHandler:(TMImageErrorBlock)completionHandler;
 
 /// Applies \c filter on the current workspace state texture, causing the current output texture
-/// to be the filtered version of the current workspace state.
-- (void)useFilter:(id<TMGLFilter>)filter;
+/// drawn on the output buffer to be the filtered version of the current workspace state.
+- (void)applyFilter:(id<TMGLFilter>)filter;
 
 /// Draws the internal workspace state to the output buffer specified by \c outputBuffer method.
 - (void)draw;
 
-/// Adjust the pan offset and zoom scale of the displayed workspace to \c offset and \c scale
-/// respectively. This automatically calls \c draw internally for performace reasons.
-- (void)panOffset:(CGPoint)offset andZoomScale:(float)scale;
+/// Removes the currently applied \c TMGLFilter object and returns to the previous state.
+- (void)cancelFilter;
+
+/// Removes the currently applied \c TMGLFilter object and sets the default texture to it's output.
+- (void)acceptFilter;
+
+/// Adjust the pan offset and of the displayed workspace by \c offset. pass \c YES to \c ended if
+// the offset is reseted and the current value should be falttened and stored.
+- (void)panOffset:(CGPoint)offset ended:(BOOL)ended;
+
+/// Adjust the zoom scale offset and of the displayed workspace by \c offset. pass \c YES to
+/// \c ended if the offset is reseted and the current value should be falttened and stored.
+/// \c panOffset is the center of the zoom gesture, used to make the zoom's focal point in that
+/// point.
+- (void)zoomScaleOffset:(CGFloat)offset focalPoint:(CGPoint)focalPoint ended:(BOOL)ended;
 
 /// Determines the output buffer of the engine's subsequent draws as \c outputBuffer.
 /// \c outputBuffer's size property will also determine the aspect ratio correction made from image

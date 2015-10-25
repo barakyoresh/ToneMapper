@@ -2,6 +2,8 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Editor View Controller-->
@@ -33,11 +35,19 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hgd-Rc-kaV">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Tone Adjust">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tonalFeature:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cEb-SE-9ui"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="31i-Mo-rtp"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="5YT-eP-sYj"/>
+                            <constraint firstItem="PFv-8R-J30" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="4JL-S7-vun"/>
                             <constraint firstItem="PFv-8R-J30" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="DIn-W1-eCU"/>
                             <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="DQJ-1f-TK2"/>
                             <constraint firstItem="PFv-8R-J30" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="EHO-Ju-84u"/>
@@ -56,21 +66,26 @@
                             <constraint firstItem="PFv-8R-J30" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="cDS-JN-IBn"/>
                             <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="cWE-5U-xUB"/>
                             <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="daR-mj-sbc"/>
+                            <constraint firstItem="PFv-8R-J30" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="f2X-9a-Ozv"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Hgd-Rc-kaV" secondAttribute="bottom" constant="8" symbolic="YES" id="glk-24-eTW"/>
+                            <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="i5C-9b-Ryc"/>
                             <constraint firstItem="PFv-8R-J30" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="inD-l3-bSh"/>
                             <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="ja1-HZ-i8d"/>
+                            <constraint firstItem="Hgd-Rc-kaV" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="ji9-eI-cLf"/>
                             <constraint firstItem="PFv-8R-J30" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="p0Q-M1-ddU"/>
                             <constraint firstItem="PFv-8R-J30" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="qwQ-fn-EjC"/>
-                            <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="rKt-OF-8ws"/>
                             <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="rwu-QJ-wbj"/>
                             <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="zEw-ry-CNI"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="PFv-8R-J30"/>
+                                <exclude reference="Hgd-Rc-kaV"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="31i-Mo-rtp"/>
-                                <exclude reference="5YT-eP-sYj"/>
+                                <exclude reference="glk-24-eTW"/>
+                                <exclude reference="ji9-eI-cLf"/>
+                                <exclude reference="4JL-S7-vun"/>
                                 <exclude reference="DIn-W1-eCU"/>
                                 <exclude reference="DQJ-1f-TK2"/>
                                 <exclude reference="EHO-Ju-84u"/>
@@ -89,11 +104,12 @@
                                 <exclude reference="cDS-JN-IBn"/>
                                 <exclude reference="cWE-5U-xUB"/>
                                 <exclude reference="daR-mj-sbc"/>
+                                <exclude reference="f2X-9a-Ozv"/>
+                                <exclude reference="i5C-9b-Ryc"/>
                                 <exclude reference="inD-l3-bSh"/>
                                 <exclude reference="ja1-HZ-i8d"/>
                                 <exclude reference="p0Q-M1-ddU"/>
                                 <exclude reference="qwQ-fn-EjC"/>
-                                <exclude reference="rKt-OF-8ws"/>
                                 <exclude reference="rwu-QJ-wbj"/>
                                 <exclude reference="zEw-ry-CNI"/>
                             </mask>
@@ -129,11 +145,14 @@
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="PFv-8R-J30"/>
+                                <include reference="Hgd-Rc-kaV"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="31i-Mo-rtp"/>
-                                <include reference="5YT-eP-sYj"/>
-                                <include reference="rKt-OF-8ws"/>
+                                <include reference="glk-24-eTW"/>
+                                <include reference="ji9-eI-cLf"/>
+                                <include reference="4JL-S7-vun"/>
+                                <include reference="f2X-9a-Ozv"/>
+                                <include reference="i5C-9b-Ryc"/>
                             </mask>
                         </variation>
                     </view>

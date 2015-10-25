@@ -9,6 +9,8 @@
 #import "TMGLEngine.h"
 #import "TMActivityIndicator.h"
 #import "TMGLDrawer.h"
+#import "TMGLFeatureManagerViewController.h"
+#import "TMTonalFeature.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,6 +23,12 @@ NS_ASSUME_NONNULL_BEGIN
 /// Loading indicator used when loading images to or from the device memory.
 @property (strong, nonatomic) TMActivityIndicator *loadingIndicator;
 
+/// \c TMGLEngine for business logic handling.
+@property (strong, readonly, nonatomic) TMGLEngine *engine;
+
+/// \c TMGLDrawer object to manage all draws and image processing.
+@property (strong, readonly, nonatomic) TMGLDrawer *drawer;
+
 @end
 
 @implementation TMEditorViewController
@@ -32,11 +40,12 @@ static NSString * const kAlertDismissText = @"OK";
 
 - (void)viewDidLoad {
   NSLog(@"editor loaded");
-  TMGLEngine *engine =
-  [[TMGLEngine alloc] initWithDrawer:[[TMGLDrawer alloc]
+  _drawer = [[TMGLDrawer alloc]
       initWithProgramCompiler:[[TMGLCachedProgramCompiler alloc]
-      initWithShaderCompiler:[[TMGLDefaultShaderCompiler alloc] init]]]];
-  self.TMGLviewController = [[TMGLViewController alloc] initWithEngine:engine];
+      initWithShaderCompiler:[[TMGLDefaultShaderCompiler alloc] init]]];
+  _engine =
+      [[TMGLEngine alloc] initWithDrawer:self.drawer];
+  self.TMGLviewController = [[TMGLViewController alloc] initWithEngine:self.engine];
   [self addChildViewController:self.TMGLviewController];
   [self.view addSubview:self.TMGLviewController.view];
   [self.TMGLviewController didMoveToParentViewController:self];
@@ -120,6 +129,24 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
                                         cancelButtonTitle:kAlertDismissText otherButtonTitles:nil];
   [alert show];
 }
+
+#pragma mark -
+#pragma mark Feature Management
+#pragma mark -
+
+- (IBAction)tonalFeature:(id)sender {
+  TMTonalFeature *tonalFeature = [[TMTonalFeature alloc] initWithDrawer:self.drawer];
+  [self segueToFeatureManagerWithFeature:tonalFeature];
+}
+
+- (void)segueToFeatureManagerWithFeature:(id<TMFeature>)feature {
+  TMGLFeatureManagerViewController *featureManagerCV =
+      [[TMGLFeatureManagerViewController alloc] initWithEngine:self.engine andFeature:feature];
+      featureManagerCV.modalTransitionStyle = UIModalPresentationFullScreen;
+      featureManagerCV.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+  [self presentViewController:featureManagerCV animated:NO completion:nil];
+}
+
 
 @end
 

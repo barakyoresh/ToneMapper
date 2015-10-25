@@ -33,11 +33,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// error and nil otherwise.
 - (void)loadImage:(UIImage *)image completionHandler:(TMErrorBlock)completionHandler;
 
-/// Request for the currently edited version of the image displayed in this view controller's view while
-/// ignoring current zoom and pan state. Upon completion \c completionHandler will be
+/// Request for the currently edited version of the image displayed in this view controller's view
+/// while ignoring current zoom and pan state. Upon completion \c completionHandler will be
 /// called with \c image as the edited image or nil upon error. Incase of an error \c error will
 /// be filled with an appropriate error value.
 - (void)imageFromWorkspaceWithCompletionHandler:(TMImageErrorBlock)completionHandler;
+
+/// Informs the system that internal openGL view needs to be redisplayed.
+- (void)glSetNeedsDisplay;
 
 @end
 

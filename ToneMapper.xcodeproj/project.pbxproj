@@ -11,6 +11,7 @@
 		8404A0231BBD5DDA00D3C1C5 /* TMGLIdentityProgram.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8404A0211BBD5DDA00D3C1C5 /* TMGLIdentityProgram.fsh */; };
 		8404A0241BBD5DDA00D3C1C5 /* TMGLIdentityProgram.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 8404A0221BBD5DDA00D3C1C5 /* TMGLIdentityProgram.vsh */; };
 		8404A0271BBD7F4A00D3C1C5 /* TMGLProgramUniformMatrix4f.m in Sources */ = {isa = PBXBuildFile; fileRef = 8404A0261BBD7F4A00D3C1C5 /* TMGLProgramUniformMatrix4f.m */; };
+		840DD3D91BD902F600FA2015 /* TMTonalFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = 840DD3D81BD902F600FA2015 /* TMTonalFeature.m */; };
 		84135A411BD7CF9900004A0E /* TMGLProgram.m in Sources */ = {isa = PBXBuildFile; fileRef = 84135A401BD7CF9900004A0E /* TMGLProgram.m */; };
 		84135A441BD7CFD500004A0E /* TMGLProgramCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84135A431BD7CFD500004A0E /* TMGLProgramCacheManager.m */; };
 		843C99671BAEFD0900942B90 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 843C99661BAEFD0900942B90 /* GLKit.framework */; };
@@ -21,6 +22,10 @@
 		843DD0F71BAEF2CC001500F0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 843DD0F61BAEF2CC001500F0 /* Images.xcassets */; };
 		843DD0FA1BAEF2CC001500F0 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 843DD0F81BAEF2CC001500F0 /* LaunchScreen.xib */; };
 		844EB6DC1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.m in Sources */ = {isa = PBXBuildFile; fileRef = 844EB6DB1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.m */; };
+		849508141BD7F2DB00E3CD0E /* TMGLFeatureManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 849508111BD7F2DB00E3CD0E /* TMGLFeatureManagerViewController.m */; };
+		8495081E1BD8F48400E3CD0E /* TMToneAdjustFilter.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 8495081C1BD8F48400E3CD0E /* TMToneAdjustFilter.fsh */; };
+		8495081F1BD8F48400E3CD0E /* TMToneAdjustFilter.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 8495081D1BD8F48400E3CD0E /* TMToneAdjustFilter.vsh */; };
+		849508221BD8F58B00E3CD0E /* TMGLToneAdjustFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 849508211BD8F58B00E3CD0E /* TMGLToneAdjustFilter.m */; };
 		849523081BD37C0D00F01C75 /* TMGLProgramParametersBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = 849523071BD37C0D00F01C75 /* TMGLProgramParametersBuilder.m */; };
 		8495230C1BD37CDF00F01C75 /* TMEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8495230B1BD37CDF00F01C75 /* TMEditorViewController.m */; };
 		8495230F1BD37CF100F01C75 /* TMGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8495230E1BD37CF100F01C75 /* TMGLViewController.m */; };
@@ -63,6 +68,8 @@
 		8404A0221BBD5DDA00D3C1C5 /* TMGLIdentityProgram.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = TMGLIdentityProgram.vsh; sourceTree = "<group>"; };
 		8404A0251BBD7F4A00D3C1C5 /* TMGLProgramUniformMatrix4f.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLProgramUniformMatrix4f.h; sourceTree = "<group>"; };
 		8404A0261BBD7F4A00D3C1C5 /* TMGLProgramUniformMatrix4f.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLProgramUniformMatrix4f.m; sourceTree = "<group>"; };
+		840DD3D71BD902E600FA2015 /* TMTonalFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMTonalFeature.h; sourceTree = "<group>"; };
+		840DD3D81BD902F600FA2015 /* TMTonalFeature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMTonalFeature.m; sourceTree = "<group>"; };
 		84135A3F1BD7CF9900004A0E /* TMGLProgram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLProgram.h; sourceTree = "<group>"; };
 		84135A401BD7CF9900004A0E /* TMGLProgram.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLProgram.m; sourceTree = "<group>"; };
 		84135A421BD7CFD500004A0E /* TMGLProgramCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLProgramCacheManager.h; sourceTree = "<group>"; };
@@ -82,6 +89,13 @@
 		844EB6D01BB047F2004D8E1F /* TMGLProgramParameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMGLProgramParameters.h; sourceTree = "<group>"; };
 		844EB6DA1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLDefaultProgramCompiler.h; sourceTree = "<group>"; };
 		844EB6DB1BB3D26D004D8E1F /* TMGLDefaultProgramCompiler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLDefaultProgramCompiler.m; sourceTree = "<group>"; };
+		8495080F1BD7F2DB00E3CD0E /* TMFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMFeature.h; sourceTree = "<group>"; };
+		849508101BD7F2DB00E3CD0E /* TMGLFeatureManagerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLFeatureManagerViewController.h; sourceTree = "<group>"; };
+		849508111BD7F2DB00E3CD0E /* TMGLFeatureManagerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLFeatureManagerViewController.m; sourceTree = "<group>"; };
+		8495081C1BD8F48400E3CD0E /* TMToneAdjustFilter.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = TMToneAdjustFilter.fsh; sourceTree = "<group>"; };
+		8495081D1BD8F48400E3CD0E /* TMToneAdjustFilter.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = TMToneAdjustFilter.vsh; sourceTree = "<group>"; };
+		849508201BD8F58B00E3CD0E /* TMGLToneAdjustFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMGLToneAdjustFilter.h; sourceTree = "<group>"; };
+		849508211BD8F58B00E3CD0E /* TMGLToneAdjustFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLToneAdjustFilter.m; sourceTree = "<group>"; };
 		849523061BCFFF5E00F01C75 /* TMTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMTypes.h; sourceTree = "<group>"; };
 		849523071BD37C0D00F01C75 /* TMGLProgramParametersBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMGLProgramParametersBuilder.m; sourceTree = "<group>"; };
 		849523091BD37C3700F01C75 /* TMGLProgramParametersBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TMGLProgramParametersBuilder.h; sourceTree = "<group>"; };
@@ -179,6 +193,15 @@
 			path = "Internal Shaders";
 			sourceTree = "<group>";
 		};
+		840DD3D61BD902C900FA2015 /* Tonal Feature */ = {
+			isa = PBXGroup;
+			children = (
+				840DD3D71BD902E600FA2015 /* TMTonalFeature.h */,
+				840DD3D81BD902F600FA2015 /* TMTonalFeature.m */,
+			);
+			name = "Tonal Feature";
+			sourceTree = "<group>";
+		};
 		843DD0DD1BAEF2CC001500F0 = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +228,7 @@
 				84BE5A6E1BAF08E200683996 /* Model */,
 				84E100911BCFB93B00484C61 /* TMActivityIndicator.h */,
 				84E100921BCFB93B00484C61 /* TMActivityIndicator.m */,
+				849508161BD8F38B00E3CD0E /* Features */,
 				8495230A1BD37CDF00F01C75 /* TMEditorViewController.h */,
 				8495230B1BD37CDF00F01C75 /* TMEditorViewController.m */,
 				8495230D1BD37CF100F01C75 /* TMGLViewController.h */,
@@ -245,25 +269,80 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8495368B1BC574E2001C3104 /* Infastracture */ = {
+		849508161BD8F38B00E3CD0E /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				849536931BCBB9B1001C3104 /* TMGLProgram */,
-				849523061BCFFF5E00F01C75 /* TMTypes.h */,
-				84EB84581BBA9C1500EF34B7 /* TMGLEngine.h */,
-				84EB84591BBA9C1500EF34B7 /* TMGLEngine.m */,
-				84F7D41D1BCD5897008AAA68 /* TMGLDrawer.h */,
-				84F7D41E1BCD5897008AAA68 /* TMGLDrawer.m */,
-				84F7D4201BCE3CFD008AAA68 /* TMGLFilter.h */,
-				84F7D4211BCE4423008AAA68 /* TMGLIdentityFilter.h */,
-				84F7D4221BCE4423008AAA68 /* TMGLIdentityFilter.m */,
+				840DD3D61BD902C900FA2015 /* Tonal Feature */,
+				8495080F1BD7F2DB00E3CD0E /* TMFeature.h */,
+				849508101BD7F2DB00E3CD0E /* TMGLFeatureManagerViewController.h */,
+				849508111BD7F2DB00E3CD0E /* TMGLFeatureManagerViewController.m */,
+			);
+			name = Features;
+			sourceTree = "<group>";
+		};
+		849508171BD8F3A600E3CD0E /* Buffers */ = {
+			isa = PBXGroup;
+			children = (
 				8495368F1BCB8D05001C3104 /* TMGLBuffer.h */,
 				84A60D2F1BC4FBE2002FB254 /* TMGLTextureFrameBuffer.h */,
 				84A60D301BC4FBE2002FB254 /* TMGLTextureFrameBuffer.m */,
 				849536901BCB8F3E001C3104 /* TMGLScreenRenderBuffer.h */,
 				849536911BCB8F3E001C3104 /* TMGLScreenRenderBuffer.m */,
+			);
+			name = Buffers;
+			sourceTree = "<group>";
+		};
+		849508181BD8F3BF00E3CD0E /* Textures */ = {
+			isa = PBXGroup;
+			children = (
 				8495368C1BCA931A001C3104 /* TMGLTexture.h */,
 				8495368D1BCA931A001C3104 /* TMGLTexture.m */,
+			);
+			name = Textures;
+			sourceTree = "<group>";
+		};
+		849508191BD8F3D800E3CD0E /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				84F7D4201BCE3CFD008AAA68 /* TMGLFilter.h */,
+				8495081A1BD8F44900E3CD0E /* Tonal Filter */,
+				84F7D4211BCE4423008AAA68 /* TMGLIdentityFilter.h */,
+				84F7D4221BCE4423008AAA68 /* TMGLIdentityFilter.m */,
+			);
+			name = Filters;
+			sourceTree = "<group>";
+		};
+		8495081A1BD8F44900E3CD0E /* Tonal Filter */ = {
+			isa = PBXGroup;
+			children = (
+				8495081B1BD8F45500E3CD0E /* Shaders */,
+				849508201BD8F58B00E3CD0E /* TMGLToneAdjustFilter.h */,
+				849508211BD8F58B00E3CD0E /* TMGLToneAdjustFilter.m */,
+			);
+			name = "Tonal Filter";
+			sourceTree = "<group>";
+		};
+		8495081B1BD8F45500E3CD0E /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				8495081C1BD8F48400E3CD0E /* TMToneAdjustFilter.fsh */,
+				8495081D1BD8F48400E3CD0E /* TMToneAdjustFilter.vsh */,
+			);
+			name = Shaders;
+			sourceTree = "<group>";
+		};
+		8495368B1BC574E2001C3104 /* Infastracture */ = {
+			isa = PBXGroup;
+			children = (
+				849523061BCFFF5E00F01C75 /* TMTypes.h */,
+				84EB84581BBA9C1500EF34B7 /* TMGLEngine.h */,
+				84EB84591BBA9C1500EF34B7 /* TMGLEngine.m */,
+				84F7D41D1BCD5897008AAA68 /* TMGLDrawer.h */,
+				84F7D41E1BCD5897008AAA68 /* TMGLDrawer.m */,
+				849536931BCBB9B1001C3104 /* TMGLProgram */,
+				849508191BD8F3D800E3CD0E /* Filters */,
+				849508171BD8F3A600E3CD0E /* Buffers */,
+				849508181BD8F3BF00E3CD0E /* Textures */,
 				84CDC2DC1BBC02260077E78F /* TMGLGeometry.h */,
 				84CDC2DD1BBC02260077E78F /* TMGLGeometry.m */,
 				84F7D4241BCE51EF008AAA68 /* TMGLImageRenderer.h */,
@@ -409,6 +488,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8404A0231BBD5DDA00D3C1C5 /* TMGLIdentityProgram.fsh in Resources */,
+				8495081E1BD8F48400E3CD0E /* TMToneAdjustFilter.fsh in Resources */,
+				8495081F1BD8F48400E3CD0E /* TMToneAdjustFilter.vsh in Resources */,
 				843DD0F51BAEF2CC001500F0 /* Main.storyboard in Resources */,
 				843DD0FA1BAEF2CC001500F0 /* LaunchScreen.xib in Resources */,
 				8404A0241BBD5DDA00D3C1C5 /* TMGLIdentityProgram.vsh in Resources */,
@@ -489,14 +570,17 @@
 				84EB845F1BBAAC0200EF34B7 /* TMGLProgramParameters.m in Sources */,
 				849536921BCB8F3E001C3104 /* TMGLScreenRenderBuffer.m in Sources */,
 				8495230C1BD37CDF00F01C75 /* TMEditorViewController.m in Sources */,
+				849508141BD7F2DB00E3CD0E /* TMGLFeatureManagerViewController.m in Sources */,
 				8404A0271BBD7F4A00D3C1C5 /* TMGLProgramUniformMatrix4f.m in Sources */,
 				84F7D41C1BCD4A4A008AAA68 /* TMGLCachedProgramCompiler.m in Sources */,
 				84EB845A1BBA9C1500EF34B7 /* TMGLEngine.m in Sources */,
+				840DD3D91BD902F600FA2015 /* TMTonalFeature.m in Sources */,
 				84EB845D1BBAA9B400EF34B7 /* TMGLProgramAttribute.m in Sources */,
 				84F7D4261BCE51EF008AAA68 /* TMGLImageRenderer.m in Sources */,
 				84F7D41F1BCD5897008AAA68 /* TMGLDrawer.m in Sources */,
 				8495368E1BCA931A001C3104 /* TMGLTexture.m in Sources */,
 				84E100931BCFB93B00484C61 /* TMActivityIndicator.m in Sources */,
+				849508221BD8F58B00E3CD0E /* TMGLToneAdjustFilter.m in Sources */,
 				849523081BD37C0D00F01C75 /* TMGLProgramParametersBuilder.m in Sources */,
 				8495230F1BD37CF100F01C75 /* TMGLViewController.m in Sources */,
 				843DD0EC1BAEF2CC001500F0 /* main.m in Sources */,
@@ -550,7 +634,7 @@
 		843DD1071BAEF2CC001500F0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -593,7 +677,7 @@
 		843DD1081BAEF2CC001500F0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -663,13 +747,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(SRCROOT)/**",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = ToneMapperTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(SRCROOT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToneMapper.app/ToneMapper";
 			};
@@ -683,9 +768,10 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(SRCROOT)/**",
 				);
 				INFOPLIST_FILE = ToneMapperTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(SRCROOT)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ToneMapper.app/ToneMapper";
 			};

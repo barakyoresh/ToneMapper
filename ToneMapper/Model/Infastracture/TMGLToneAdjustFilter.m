@@ -140,7 +140,8 @@ static float const kYUVAtoRGBA[] = {1, 0, 1.13983, 0,
 
 - (GLKMatrix4)makeGlobalContrastMatrix {
   float globalContrast = self.globalContrast * 2;
-  return GLKMatrix4MakeScale(globalContrast, globalContrast, globalContrast);
+  return GLKMatrix4Multiply([self RGBAFromYUVA],
+         GLKMatrix4Multiply(GLKMatrix4MakeScale(globalContrast, 1, 1), [self YUVAFromRGBA]));
 }
 
 #pragma mark -

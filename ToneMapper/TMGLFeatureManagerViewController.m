@@ -13,7 +13,7 @@ static const int kFeatureControlsHeight = 100;
 static NSString * const kCancelLabel = @"X";
 static NSString * const kAcceptLabel = @"√";
 
-@interface TMGLFeatureManagerViewController()
+@interface TMGLFeatureManagerViewController() <TMFeatureDelegate>
 
 /// The \c TMGLEngine object used to handle image editing and drawing.
 @property (strong, readonly, nonatomic) TMGLEngine *engine;
@@ -28,7 +28,7 @@ static NSString * const kAcceptLabel = @"√";
 
 @implementation TMGLFeatureManagerViewController
 
-- (instancetype)initWithEngine:(TMGLEngine * __nonnull)engine andFeature:(id<TMFeature>)feature {
+- (instancetype)initWithEngine:(TMGLEngine *)engine andFeature:(id<TMFeature>)feature {
   if (self = [super init]) {
     _engine = engine;
     _feature = feature;
@@ -99,7 +99,7 @@ static NSString * const kAcceptLabel = @"√";
 #pragma mark TMFeatureDelegate
 #pragma mark -
 
-- (void)applyFilter:(id<TMGLFilter> __nonnull)filter {
+- (void)applyFilter:(id<TMGLFilter>)filter {
   [self.engine applyFilter:filter];
   [self.self.glViewController glSetNeedsDisplay];
 }

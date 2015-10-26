@@ -17,7 +17,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static NSString * const kAdjustmentMatrixUniform = @"adjustmentMatrixUniform";
+static NSString * const kAdjustmentMatrixUniform = @"adjustmentMatrix";
 static NSString * const kTonalProgramTextureCoordinatesAttribute = @"texCoords";
 static NSString * const kTonalProgramPositionAttribute = @"position";
 static NSString * const kTonalProgramTextureSamplerUniform = @"texture";
@@ -28,14 +28,14 @@ static const float kDefaultSaturation = 0.25f;
 static const float kDefaultTint = 0.5f;
 static const float kDefaultTemprature = 0.5f;
 static const float kChromaDampenWeight = 0.25f;
-static float const kRGBAtoYUVA[] = {0.299, 0.587, 0.114, 0,
-                                    -0.14713, -0.28886, 0.436, 0,
-                                    0.615, -0.51499, -0.10001, 0,
-                                    0, 0, 0, 1};
-static float const kYUVAtoRGBA[] = {1, 0, 1.13983, 0,
-                                    1, -0.39465, -0.5806, 0,
-                                    1, 2.03211, 0, 0,
-                                    0, 0, 0, 1};
+static const GLKMatrix4 kRGBAtoYUVA = {0.299, -0.14713,  0.615,   0,
+                                       0.587, -0.28886, -0.51499, 0,
+                                       0.114,  0.436,   -0.10001, 0,
+                                       0,      0,        0,       1};
+static const GLKMatrix4 kYUVAtoRGBA = {1,        1,       1,       0,
+                                       0,       -0.39465, 2.03211, 0,
+                                       1.13983, -0.5806,  0,       0,
+                                       0,        0,       0,       1};
 
 @interface TMGLToneAdjustFilter()
 
@@ -96,9 +96,8 @@ static float const kYUVAtoRGBA[] = {1, 0, 1.13983, 0,
 - (TMGLTexture *)applyOnTexture:(TMGLTexture *)inputTexture {
   GLKMatrix4 adjustmentMatrix = [self makeAdjustmentMatrix];
   self.programParams =
-  [self.programParams parametersWithReplacedUniform:[[TMGLProgramUniformMatrix4f alloc]
-                                                     initWithName:kAdjustmentMatrixUniform
-                                                     andValuePointer:(GLfloat *)&adjustmentMatrix]];
+      [self.programParams parametersWithReplacedUniform:[[TMGLProgramUniformMatrix4f alloc]
+      initWithName:kAdjustmentMatrixUniform andValuePointer:(GLfloat *)&adjustmentMatrix]];
   
   if (!self.frameBuffer || !CGSizeEqualToSize(self.frameBuffer.size, inputTexture.size)) {
     self.frameBuffer = [[TMGLTextureFrameBuffer alloc] initWithSize:inputTexture.size];
@@ -126,8 +125,8 @@ static float const kYUVAtoRGBA[] = {1, 0, 1.13983, 0,
 
 - (GLKMatrix4)makeBrightnessMatrix {
   float brightness = (self.brightness * 2) - 1;
-  return GLKMatrix4Multiply([self RGBAFromYUVA],
-         GLKMatrix4Multiply(GLKMatrix4MakeTranslation(brightness, 0, 0), [self YUVAFromRGBA]));
+  return GLKMatrix4Multiply(kYUVAtoRGBA,
+         GLKMatrix4Multiply(GLKMatrix4MakeTranslation(brightness, 0, 0), kRGBAtoYUVA));
 }
 
 #pragma mark -
@@ -140,8 +139,8 @@ static float const kYUVAtoRGBA[] = {1, 0, 1.13983, 0,
 
 - (GLKMatrix4)makeGlobalContrastMatrix {
   float globalContrast = self.globalContrast * 2;
-  return GLKMatrix4Multiply([self RGBAFromYUVA],
-         GLKMatrix4Multiply(GLKMatrix4MakeScale(globalContrast, 1, 1), [self YUVAFromRGBA]));
+  return GLKMatrix4Multiply(kYUVAtoRGBA,
+         GLKMatrix4Multiply(GLKMatrix4MakeScale(globalContrast, 1, 1), kRGBAtoYUVA));
 }
 
 #pragma mark -
@@ -154,9 +153,8 @@ static float const kYUVAtoRGBA[] = {1, 0, 1.13983, 0,
 
 - (GLKMatrix4)makeSaturationMatrix {
   float saturation = (self.saturation * 4) - 1;
-  return GLKMatrix4Multiply([self RGBAFromYUVA],
-         GLKMatrix4Multiply(GLKMatrix4MakeScale(1, 1 + saturation, 1 + saturation),
-                            [self YUVAFromRGBA]));
+  return GLKMatrix4Multiply(kYUVAtoRGBA,
+         GLKMatrix4Multiply(GLKMatrix4MakeScale(1, 1 + saturation, 1 + saturation), kRGBAtoYUVA));
 }
 
 #pragma mark -
@@ -169,8 +167,8 @@ static float const kYUVAtoRGBA[] = {1, 0, 1.13983, 0,
 
 - (GLKMatrix4)makeTintMatrix {
   float tint = (self.tint - 0.5) * kChromaDampenWeight;
-  return GLKMatrix4Multiply([self RGBAFromYUVA],
-         GLKMatrix4Multiply(GLKMatrix4MakeTranslation(0, tint, tint), [self YUVAFromRGBA]));
+  return GLKMatrix4Multiply(kYUVAtoRGBA,
+         GLKMatrix4Multiply(GLKMatrix4MakeTranslation(0, tint, tint), kRGBAtoYUVA));
 }
 
 #pragma mark -
@@ -183,20 +181,8 @@ static float const kYUVAtoRGBA[] = {1, 0, 1.13983, 0,
 
 - (GLKMatrix4)makeTempratureMatrix {
   float temp =  (self.temprature - 0.5) * -kChromaDampenWeight;
-  return GLKMatrix4Multiply([self RGBAFromYUVA],
-         GLKMatrix4Multiply(GLKMatrix4MakeTranslation(0, temp, -temp), [self YUVAFromRGBA]));
-}
-
-#pragma mark -
-#pragma mark Colorspace transformations
-#pragma mark -
-
-- (GLKMatrix4)YUVAFromRGBA {
-  return GLKMatrix4MakeWithArrayAndTranspose((float *)kRGBAtoYUVA);
-}
-
-- (GLKMatrix4)RGBAFromYUVA {
-  return GLKMatrix4MakeWithArrayAndTranspose((float *)kYUVAtoRGBA);
+  return GLKMatrix4Multiply(kYUVAtoRGBA,
+         GLKMatrix4Multiply(GLKMatrix4MakeTranslation(0, temp, -temp), kRGBAtoYUVA));
 }
 
 @end

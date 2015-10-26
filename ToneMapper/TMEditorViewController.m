@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// A View controller wrapping all the usage of the opengl enviorment via it's injected
 /// \c TMGLEngine.
-@property (strong, nonatomic) TMGLViewController *TMGLviewController;
+@property (strong, nonatomic) TMGLViewController *glViewController;
 
 /// Loading indicator used when loading images to or from the device memory.
 @property (strong, nonatomic) TMActivityIndicator *loadingIndicator;
@@ -45,10 +45,10 @@ static NSString * const kAlertDismissText = @"OK";
       initWithShaderCompiler:[[TMGLDefaultShaderCompiler alloc] init]]];
   _engine =
       [[TMGLEngine alloc] initWithDrawer:self.drawer];
-  self.TMGLviewController = [[TMGLViewController alloc] initWithEngine:self.engine];
-  [self addChildViewController:self.TMGLviewController];
-  [self.view addSubview:self.TMGLviewController.view];
-  [self.TMGLviewController didMoveToParentViewController:self];
+  self.glViewController = [[TMGLViewController alloc] initWithEngine:self.engine];
+  [self addChildViewController:self.glViewController];
+  [self.view addSubview:self.glViewController.view];
+  [self.glViewController didMoveToParentViewController:self];
   self.loadingIndicator = [[TMActivityIndicator alloc] initWithView:self.view];
 }
 
@@ -65,7 +65,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
   
   NSLog(@"Chosen image: %@", chosenImage);
   
-  [self.TMGLviewController loadImage:chosenImage completionHandler:^(NSError * __nullable error) {
+  [self.glViewController loadImage:chosenImage completionHandler:^(NSError * __nullable error) {
     if (error) {
       [self showSimpleAlert:kAlertImageLoadFailure];
     }
@@ -88,7 +88,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 
 - (IBAction)saveImage:(id)sender {
   [self.loadingIndicator start];
-  [self.TMGLviewController imageFromWorkspaceWithCompletionHandler:^(UIImage * __nullable image,
+  [self.glViewController imageFromWorkspaceWithCompletionHandler:^(UIImage * __nullable image,
                                                                      NSError * __nullable error) {
     if (!image) {
       [self showSimpleAlert:kAlertImageSaveFailure];
@@ -146,7 +146,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
       featureManagerCV.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
   [self presentViewController:featureManagerCV animated:NO completion:nil];
 }
-
 
 @end
 

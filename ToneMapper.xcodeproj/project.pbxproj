@@ -229,6 +229,8 @@
 				84E100911BCFB93B00484C61 /* TMActivityIndicator.h */,
 				84E100921BCFB93B00484C61 /* TMActivityIndicator.m */,
 				849508161BD8F38B00E3CD0E /* Features */,
+				849508101BD7F2DB00E3CD0E /* TMGLFeatureManagerViewController.h */,
+				849508111BD7F2DB00E3CD0E /* TMGLFeatureManagerViewController.m */,
 				8495230A1BD37CDF00F01C75 /* TMEditorViewController.h */,
 				8495230B1BD37CDF00F01C75 /* TMEditorViewController.m */,
 				8495230D1BD37CF100F01C75 /* TMGLViewController.h */,
@@ -274,8 +276,6 @@
 			children = (
 				840DD3D61BD902C900FA2015 /* Tonal Feature */,
 				8495080F1BD7F2DB00E3CD0E /* TMFeature.h */,
-				849508101BD7F2DB00E3CD0E /* TMGLFeatureManagerViewController.h */,
-				849508111BD7F2DB00E3CD0E /* TMGLFeatureManagerViewController.m */,
 			);
 			name = Features;
 			sourceTree = "<group>";

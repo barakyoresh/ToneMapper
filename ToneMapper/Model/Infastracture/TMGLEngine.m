@@ -75,7 +75,7 @@ NS_ASSUME_NONNULL_BEGIN
               withProgramParameters:self.workspaceInspectorProgram];
 }
 
-- (void)applyFilter:(id<TMGLFilter> __nonnull)filter {
+- (void)applyFilter:(id<TMGLFilter>)filter {
   self.outputTexture = [filter applyOnTexture:self.inputTexture];
 }
 
@@ -157,7 +157,7 @@ NS_ASSUME_NONNULL_BEGIN
   }
 }
 
-- (void)outputBuffer:(id<TMGLBuffer> __nonnull)outputBuffer {
+- (void)outputBuffer:(id<TMGLBuffer>)outputBuffer {
   self.outputBuffer = outputBuffer;
 }
 

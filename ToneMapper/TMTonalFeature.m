@@ -52,15 +52,15 @@ static const int kTempratureSegment = 4;
 - (UIView *)controlsWithFrame:(CGRect)rect {
   UIView *view = [[UIView alloc] initWithFrame:rect];
   self.slider =
-    [[UISlider alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, (rect.size.height / 2))];
+      [[UISlider alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, (rect.size.height / 2))];
   [self.slider addTarget:self action:@selector(sliderValueChanged:)
-    forControlEvents:UIControlEventValueChanged];
+      forControlEvents:UIControlEventValueChanged];
   
   self.operatorOptions = [[UISegmentedControl alloc]
       initWithItems:@[kBrightnessLabel, kContrastLabel, kSaturationLabel, kTintLabel,
                       kTempratureLabel]];
   [self.operatorOptions addTarget:self action:@selector(toneOptionsValueChanged:)
-   forControlEvents:UIControlEventValueChanged];
+                 forControlEvents:UIControlEventValueChanged];
   [self.operatorOptions setSelectedSegmentIndex:0];
   [self toneOptionsValueChanged:self.operatorOptions];
   

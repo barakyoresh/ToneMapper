@@ -37,6 +37,12 @@ NS_ASSUME_NONNULL_BEGIN
   return self;
 }
 
+- (void)viewDidLoad {
+  self.loadingIndicator = [[TMActivityIndicator alloc] initWithView:self.view];
+  [self setupGLKView];
+  [self enableScrolling];
+}
+
 - (void)setupGLKView {
   self.glkView = [[GLKView alloc] initWithFrame:self.view.bounds];
   [self.view addSubview:self.glkView];
@@ -46,18 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-  NSLog(@"view did apear");
-  if (!self.glkView) {
-    [self setupGLKView];
-    [self enableScrolling];
-  }
-  
-  if (!self.loadingIndicator) {
-    self.loadingIndicator = [[TMActivityIndicator alloc] initWithView:self.view];
-  }
-
   self.engine.outputBuffer = [[TMGLScreenRenderBuffer alloc] initWithGLKView:self.glkView];
-  
   [self.glkView setNeedsDisplay];
 }
 
@@ -74,10 +69,6 @@ completionHandler:(TMErrorBlock)completionHandler {
   
   [self.engine loadImage:image completionHandler:^(NSError *error) {
     NSLog(@"load image completion block, error:%@", error);
-    if (!error) {
-
-    }
-    
     dispatch_async(dispatch_get_main_queue(), ^{
       NSLog(@"stopping animation");
       [self.loadingIndicator stop];

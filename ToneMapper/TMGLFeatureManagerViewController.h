@@ -10,14 +10,14 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /// Generic Feature view controller enabling canceling and saving of feature parameters.
-@interface TMGLFeatureManagerViewController : UIViewController <TMFeatureDelegate>
+@interface TMGLFeatureManagerViewController : UIViewController
 
 /// Setting super initializers to unavailable.
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (instancetype)initWithCoder:(NSCoder * __nullable)aDecoder NS_UNAVAILABLE;
 
 /// Setting super initializers to unavailable.
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-    NS_UNAVAILABLE;
+- (instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil
+                         bundle:(NSBundle * __nullable)nibBundleOrNil NS_UNAVAILABLE;
 
 /// Initializer recieving \c TMGLEngine object as it's core buisiness logic interface.
 - (instancetype)initWithEngine:(TMGLEngine *)engine andFeature:(id<TMFeature>)feature

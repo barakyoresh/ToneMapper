@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (UIView *)controlsWithFrame:(CGRect)rect;
 
 /// \c TMFeatureDelegate object to recieve calls to \c applyFilter when this filter sees fit.
-@property (strong, nonatomic) id<TMFeatureDelegate> delegate;
+@property (weak, nonatomic) id<TMFeatureDelegate> delegate;
 
 @end
 

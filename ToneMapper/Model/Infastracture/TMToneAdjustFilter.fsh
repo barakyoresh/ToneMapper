@@ -3,8 +3,8 @@
 
 varying lowp vec2 textureCoordinates;
 uniform sampler2D texture;
-uniform lowp mat4 adjustmentMatrixUniform;
+uniform lowp mat4 adjustmentMatrix;
 
 void main() {
-  gl_FragColor = adjustmentMatrixUniform * texture2D(texture, textureCoordinates);
+  gl_FragColor = adjustmentMatrix * texture2D(texture, textureCoordinates);
 }

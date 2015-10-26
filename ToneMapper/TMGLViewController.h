@@ -19,11 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init NS_UNAVAILABLE;
 
 /// Set super initializers as unavilable.
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+- (instancetype)initWithCoder:(NSCoder * __nullable)aDecoder NS_UNAVAILABLE;
 
 /// Set super initializers as unavilable.
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-    NS_UNAVAILABLE;
+- (instancetype)initWithNibName:(NSString * __nullable)nibNameOrNil
+                         bundle:(NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
 
 /// Initializer recieving \c TMGLEngine object as it's core buisiness logic interface.
 - (instancetype)initWithEngine:(TMGLEngine *)engine NS_DESIGNATED_INITIALIZER;

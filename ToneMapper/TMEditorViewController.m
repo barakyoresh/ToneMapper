@@ -139,12 +139,14 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
   [self segueToFeatureManagerWithFeature:tonalFeature];
 }
 
+
 - (void)segueToFeatureManagerWithFeature:(id<TMFeature>)feature {
   TMGLFeatureManagerViewController *featureManagerCV =
       [[TMGLFeatureManagerViewController alloc] initWithEngine:self.engine andFeature:feature];
-      featureManagerCV.modalTransitionStyle = UIModalPresentationFullScreen;
-      featureManagerCV.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-  [self presentViewController:featureManagerCV animated:NO completion:nil];
+     // featureManagerCV.modalTransitionStyle = UIModalPresentationFullScreen;
+      //featureManagerCV.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+  //[self presentViewController:featureManagerCV animated:NO completion:nil];
+  [self.navigationController pushViewController:featureManagerCV animated:NO];
 }
 
 @end

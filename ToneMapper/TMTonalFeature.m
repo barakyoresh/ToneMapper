@@ -74,8 +74,6 @@ static const int kTempratureSegment = 4;
 }
 
 - (IBAction)sliderValueChanged:(UISlider *)sender {
-  NSLog(@"slider value = %f, currently selected segment = %lu", sender.value,
-        self.operatorOptions.selectedSegmentIndex);
   switch (self.operatorOptions.selectedSegmentIndex) {
     case kBrightnessSegment:
       self.filter.brightness = sender.value;
@@ -99,7 +97,6 @@ static const int kTempratureSegment = 4;
 }
 
 - (IBAction)toneOptionsValueChanged:(UISegmentedControl *)sender {
-  NSLog(@"selected segment = %lu", sender.selectedSegmentIndex);
   switch (sender.selectedSegmentIndex) {
     case kBrightnessSegment:
       [self.slider setValue:self.filter.brightness];

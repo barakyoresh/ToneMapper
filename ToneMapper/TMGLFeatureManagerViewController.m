@@ -8,7 +8,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static const int kNavigationBarHeight = 44;
 static const int kFeatureControlsHeight = 100;
 static NSString * const kCancelLabel = @"X";
 static NSString * const kAcceptLabel = @"√";
@@ -22,6 +21,7 @@ static NSString * const kAcceptLabel = @"√";
 /// the controls and calling \c TMGLFeatureManagerViewController's \c TMGLFeatureDelegate methods.
 @property (strong, readonly, nonatomic) id<TMFeature> feature;
 
+/// Internally managed \c TMGLViewController to display the \c TMGLEngine's workspace.
 @property (strong, nonatomic) TMGLViewController *glViewController;
 
 @end
@@ -40,7 +40,7 @@ static NSString * const kAcceptLabel = @"√";
 - (void)viewDidLoad {
   [self.view setBackgroundColor:[UIColor clearColor]];
   [self addTMGLviewController];
-  [self addNavigationBar];
+  [self configureNavigationBar];
   [self inflateFeatureControls];
 }
 
@@ -55,34 +55,26 @@ static NSString * const kAcceptLabel = @"√";
 #pragma mark Navigation bar
 #pragma mark -
 
-- (void)addNavigationBar {
-  UINavigationBar *navigationBar = [[UINavigationBar alloc]
-    initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, kNavigationBarHeight)];
-  UIBarButtonItem *cancelButton = [[UIBarButtonItem alloc] initWithTitle:kCancelLabel
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(cancel)];
+- (void)configureNavigationBar {
+  UIBarButtonItem *cancelButton =
+      [[UIBarButtonItem alloc] initWithTitle:kCancelLabel style:UIBarButtonItemStylePlain
+                                      target:self action:@selector(cancel)];
   
-  UIBarButtonItem *acceptButton = [[UIBarButtonItem alloc] initWithTitle:kAcceptLabel
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(accept)];
-  
-  UINavigationItem *navigationItem = [[UINavigationItem alloc] init];
-  [navigationItem setLeftBarButtonItem:cancelButton];
-  [navigationItem setRightBarButtonItem:acceptButton];
-  [navigationBar setItems:@[navigationItem]];
-  [self.view addSubview:navigationBar];
+  UIBarButtonItem *acceptButton =
+      [[UIBarButtonItem alloc] initWithTitle:kAcceptLabel style:UIBarButtonItemStylePlain
+                                      target:self action:@selector(accept)];
+  [self.navigationItem setRightBarButtonItem:acceptButton];
+  [self.navigationItem setLeftBarButtonItem:cancelButton];
 }
 
 - (void)cancel {
   [self.engine cancelFilter];
-  [self dismissViewControllerAnimated:NO completion:nil];
+  [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 - (void)accept {
   [self.engine acceptFilter];
-  [self dismissViewControllerAnimated:NO completion:nil];
+  [self.navigationController popToRootViewControllerAnimated:NO];
 }
 
 #pragma mark -

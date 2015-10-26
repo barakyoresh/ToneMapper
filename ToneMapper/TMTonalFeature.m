@@ -7,6 +7,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+static const float kControlsHeight = 100;
 static NSString * const kBrightnessLabel = @"Brightness";
 static NSString * const kContrastLabel = @"Contrast";
 static NSString * const kSaturationLabel = @"Saturation";
@@ -50,9 +51,18 @@ static const int kTempratureSegment = 4;
 }
 
 - (UIView *)controlsWithFrame:(CGRect)rect {
-  UIView *view = [[UIView alloc] initWithFrame:rect];
-  self.slider =
-      [[UISlider alloc] initWithFrame:CGRectMake(0, 0, rect.size.width, (rect.size.height / 2))];
+  if (rect.size.height < kControlsHeight) {
+    NSLog(@"unable to inflate controls for height:%f, must be larger than %f", rect.size.height,
+          kControlsHeight);
+    return nil;
+  }
+  
+  CGRect controlsRect =
+      CGRectMake(0, rect.size.height - kControlsHeight, rect.size.width, kControlsHeight);
+  
+  UIView *view = [[UIView alloc] initWithFrame:controlsRect];
+  self.slider = [[UISlider alloc] initWithFrame:CGRectMake(0, 0, controlsRect.size.width,
+                                                           (controlsRect.size.height / 2))];
   [self.slider addTarget:self action:@selector(sliderValueChanged:)
       forControlEvents:UIControlEventValueChanged];
   
@@ -64,8 +74,8 @@ static const int kTempratureSegment = 4;
   [self.operatorOptions setSelectedSegmentIndex:0];
   [self toneOptionsValueChanged:self.operatorOptions];
   
-  self.operatorOptions.frame = CGRectMake(0, rect.size.height / 2, rect.size.width,
-                                          rect.size.height / 2);
+  self.operatorOptions.frame = CGRectMake(0, controlsRect.size.height / 2, controlsRect.size.width,
+                                          controlsRect.size.height / 2);
 
   [view addSubview:self.operatorOptions];
   [view addSubview:self.slider];

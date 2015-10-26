@@ -15,7 +15,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// appropriate \c TMGLFilter object.
 @protocol TMFeatureDelegate <NSObject>
 
-/// Apply \c filter on the current workspace.
+/// Apply \c filter on the current workspace. The feature must call this delegate method whenever
+/// a re-rendering of the workspace is required - i.e. when the controls were altered in a way that
+/// requires for a reaplication of the filter.
 - (void)applyFilter:(id<TMGLFilter>)filter;
 
 @end
@@ -27,6 +29,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Return this \c TMFeature's controls, determinig the outcome of future calls to be made to this
 /// feature's delegate.
 /// \c TMFeature must be retained while the return value of \c controlsWithRect are displayed.
+/// The given frame \c rect represents the available space of the entire workspace, and
+/// \c controlsWithFrame must return a view with it's \c frame property matching the desired
+/// location of the controls.
 - (UIView *)controlsWithFrame:(CGRect)rect;
 
 /// \c TMFeatureDelegate object to recieve calls to \c applyFilter when this filter sees fit.

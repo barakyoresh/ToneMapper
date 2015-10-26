@@ -5,10 +5,11 @@
 
 #import "TMGLEngine.h"
 #import "TMGLViewController.h"
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-static const int kFeatureControlsHeight = 100;
+static const int kNavigationBarHeight = 44;
 static NSString * const kCancelLabel = @"X";
 static NSString * const kAcceptLabel = @"√";
 
@@ -23,6 +24,8 @@ static NSString * const kAcceptLabel = @"√";
 
 /// Internally managed \c TMGLViewController to display the \c TMGLEngine's workspace.
 @property (strong, nonatomic) TMGLViewController *glViewController;
+
+@property (strong, nonatomic) UIView *featureControlsContainer;
 
 @end
 
@@ -82,9 +85,18 @@ static NSString * const kAcceptLabel = @"√";
 #pragma mark -
 
 - (void)inflateFeatureControls {
-  CGRect controlRect = CGRectMake(0, self.view.bounds.size.height - kFeatureControlsHeight,
-                                  self.view.bounds.size.width, kFeatureControlsHeight);
-  [self.view addSubview:[self.feature controlsWithFrame:controlRect]];
+  float navigationBarHeight = self.navigationController.navigationBar.bounds.size.height;
+  CGRect controlRect = CGRectMake(0, navigationBarHeight, self.view.bounds.size.width,
+                                  self.view.bounds.size.height - navigationBarHeight);
+  UIView *featureControls = [self.feature controlsWithFrame:controlRect];
+  self.featureControlsContainer =
+      [[UIView alloc] initWithFrame:CGRectMake(featureControls.frame.origin.x,
+                                               featureControls.frame.origin.y + navigationBarHeight,
+                                               featureControls.frame.size.width,
+                                               featureControls.frame.size.height)];
+  featureControls.frame = featureControls.bounds;
+  [self.featureControlsContainer addSubview:featureControls];
+  [self.view addSubview:self.featureControlsContainer];
 }
 
 #pragma mark -

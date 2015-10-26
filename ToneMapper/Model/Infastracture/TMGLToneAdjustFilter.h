@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) float brightness;
 
 /// Global contrast value, capped at [0, 1] sets the \c TMToneAdjustFilter's Global contrast level
-/// to \c globalContrast. Defaults at 0.5.
+/// to \c globalContrast. Defaults at 0.25.
 @property (nonatomic) float globalContrast;
 
 /// Saturation value, capped at [0, 1] sets the \c TMToneAdjustFilter's saturation level to

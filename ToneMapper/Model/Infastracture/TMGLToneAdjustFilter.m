@@ -23,7 +23,7 @@ static NSString * const kTonalProgramPositionAttribute = @"position";
 static NSString * const kTonalProgramTextureSamplerUniform = @"texture";
 static NSString * const kTonalProgramShaderName = @"TMToneAdjustFilter";
 static const float kDefaultBrightness = 0.5f;
-static const float kDefaultGlobalContrast = 0.5f;
+static const float kDefaultGlobalContrast = 0.25f;
 static const float kDefaultSaturation = 0.25f;
 static const float kDefaultTint = 0.5f;
 static const float kDefaultTemprature = 0.5f;
@@ -138,9 +138,10 @@ static const GLKMatrix4 kYUVAtoRGBA = {1,        1,       1,       0,
 }
 
 - (GLKMatrix4)makeGlobalContrastMatrix {
-  float globalContrast = self.globalContrast * 2;
-  return GLKMatrix4Multiply(kYUVAtoRGBA,
-         GLKMatrix4Multiply(GLKMatrix4MakeScale(globalContrast, 1, 1), kRGBAtoYUVA));
+  float globalContrast = self.globalContrast * 4;
+  return GLKMatrix4Multiply(GLKMatrix4MakeTranslation(0.5, 0.5, 0.5),
+      GLKMatrix4Multiply(GLKMatrix4MakeScale(globalContrast, globalContrast, globalContrast),
+      GLKMatrix4MakeTranslation(-0.5, -0.5, -0.5)));
 }
 
 #pragma mark -

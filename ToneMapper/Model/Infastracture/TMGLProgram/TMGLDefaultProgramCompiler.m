@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString * const kVertexShaderFileExtension = @"vsh";
 static NSString * const kFragmentShaderFileExtension = @"fsh";
 
-- (instancetype)initWithShaderCompiler:(id<TMGLShaderCompiler> __nonnull)shaderCompiler {
+- (instancetype)initWithShaderCompiler:(id<TMGLShaderCompiler>)shaderCompiler {
   if (!shaderCompiler) {
     return nil;
   }
@@ -84,7 +84,7 @@ static NSString * const kFragmentShaderFileExtension = @"fsh";
   }
 }
 
-- (void)deleteShaders:(NSArray * __nonnull)shaders {
+- (void)deleteShaders:(NSArray *)shaders {
   for (id shader in shaders) {
     GLuint shaderGLPointer = (GLuint) [shader unsignedIntegerValue];
     glDeleteShader(shaderGLPointer);

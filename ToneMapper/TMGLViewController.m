@@ -1,7 +1,6 @@
 // Copyright (c) 2015 Lightricks. All rights reserved.
 // Created by Barak Yoresh.
 
-
 #import "TMGLViewController.h"
 
 #import <UIKit/UIKit.h>
@@ -12,7 +11,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
 @interface TMGLViewController()
 
 /// The \c TMGLEngine object used to handle image editing and drawing.
@@ -21,38 +19,28 @@ NS_ASSUME_NONNULL_BEGIN
 /// The view with which to display the content of the \c engine.
 @property (nonatomic, strong) GLKView *glkView;
 
-/// Internal book keeping for current panning offset.
-@property (nonatomic) CGPoint panOffset;
-
 /// Internal book keeping for current panning offset resulting by zooming off center.
 @property (nonatomic) CGPoint zoomPanOffset;
 
-/// Internal book keeping for current zoom scale.
-@property (nonatomic) CGFloat zoomScale;
-
 /// Loading indicator used when loading images to or from the view.
-@property (strong, nonatomic) TMActivityIndicator *loadingIndicator;
-
-/// Flag determining whether the internal engine's full draw cycle needs to be called
-@property (nonatomic) BOOL needsRedraw;
+@property (nonatomic, strong) TMActivityIndicator *loadingIndicator;
 
 @end
 
 @implementation TMGLViewController
 
-static const float kMaxZoomScale = 3;
-static const float kMinZoomScale = 0.2;
-
 - (instancetype)initWithEngine:(TMGLEngine *)engine {
-  if (!engine) {
-    return nil;
-  }
-  
   if (self = [super init]) {
     _engine = engine;
-    self.zoomScale = 1;
+
   }
   return self;
+}
+
+- (void)viewDidLoad {
+  self.loadingIndicator = [[TMActivityIndicator alloc] initWithView:self.view];
+  [self setupGLKView];
+  [self enableScrolling];
 }
 
 - (void)setupGLKView {
@@ -64,17 +52,14 @@ static const float kMinZoomScale = 0.2;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-  NSLog(@"view did apear");
-  if (!self.glkView) {
-    [self setupGLKView];
-    [self enableScrolling];
-    self.engine.outputBuffer = [[TMGLScreenRenderBuffer alloc] initWithGLKView:self.glkView];
-  }
-  
-  if (!self.loadingIndicator) {
-    self.loadingIndicator = [[TMActivityIndicator alloc] initWithView:self.view];
-  }
-  
+  self.engine.outputBuffer = [[TMGLScreenRenderBuffer alloc] initWithGLKView:self.glkView];
+  [self.glkView setNeedsDisplay];
+}
+
+- (void)viewWillTransitionToSize:(CGSize)size
+       withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+  self.glkView.frame =
+    CGRectMake(self.glkView.frame.origin.x, self.glkView.frame.origin.y, size.width, size.height);
   [self.glkView setNeedsDisplay];
 }
 
@@ -84,15 +69,9 @@ completionHandler:(TMErrorBlock)completionHandler {
   
   [self.engine loadImage:image completionHandler:^(NSError *error) {
     NSLog(@"load image completion block, error:%@", error);
-    if (!error) {
-      self.zoomScale = 1;
-      self.panOffset = CGPointMake(0, 0);
-    }
-    
     dispatch_async(dispatch_get_main_queue(), ^{
       NSLog(@"stopping animation");
       [self.loadingIndicator stop];
-      self.needsRedraw = YES;
       [self.glkView setNeedsDisplay];
       completionHandler(error);
     });
@@ -108,6 +87,10 @@ completionHandler:(TMErrorBlock)completionHandler {
     [self.loadingIndicator stop];
     completionHandler(image, error);
   }];
+}
+
+- (void)glSetNeedsDisplay {
+  [self.glkView setNeedsDisplay];
 }
 
 #pragma mark -
@@ -130,18 +113,10 @@ completionHandler:(TMErrorBlock)completionHandler {
 }
 
 - (void)panGesture:(UIPanGestureRecognizer *)gestureRecognizer {
-  CGPoint panOffset =
-    [self pointFromPoint:[self normalizedTranslation:[gestureRecognizer translationInView:self.view]]
-               plusPoint:self.panOffset];
-  
-  [self.engine panOffset:panOffset andZoomScale:self.zoomScale];
-  
+  [self.engine panOffset:[self normalizedTranslation:[gestureRecognizer
+                                                      translationInView:self.view]]
+                   ended:([gestureRecognizer state] == UIGestureRecognizerStateEnded)];
   [self.glkView setNeedsDisplay];
-  
-  if ([gestureRecognizer state] == UIGestureRecognizerStateEnded) {
-    self.panOffset = panOffset;
-    self.zoomPanOffset = self.panOffset;
-  }
 }
 
 - (CGPoint)normalizedTranslation:(CGPoint)translation {
@@ -151,31 +126,18 @@ completionHandler:(TMErrorBlock)completionHandler {
 }
 
 - (void)pinchGesture:(UIPinchGestureRecognizer *)gestureRecognizer {
-  CGFloat newZoomScale = [self clampedScale:self.zoomScale + ([gestureRecognizer scale] - 1)];
-  
   // Calculate and save pinch location relative to image center
   if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
-    self.zoomPanOffset =
-      [self pointFromPoint:self.panOffset minusPoint:
-        [self normalizedTranslation:
-          [self pointFromPoint:[gestureRecognizer locationInView:self.view]
-                    minusPoint:CGPointMake(self.view.bounds.size.width / 2,
-                                           self.view.bounds.size.height / 2)]]];
+    self.zoomPanOffset = [self normalizedTranslation:
+                                [self pointFromPoint:[gestureRecognizer locationInView:self.view]
+                                          minusPoint:CGPointMake(self.view.bounds.size.width / 2,
+                                                                self.view.bounds.size.height / 2)]];
   }
   
-  // Calculate pan correction required 
-  CGPoint panCorrection =
-    [self pointFromPoint:CGPointApplyAffineTransform(self.zoomPanOffset,
-      CGAffineTransformMakeScale(newZoomScale - self.zoomScale, newZoomScale - self.zoomScale))
-               plusPoint:self.panOffset];
+  [self.engine zoomScaleOffset:([gestureRecognizer scale] - 1) focalPoint:self.zoomPanOffset
+                         ended:([gestureRecognizer state] == UIGestureRecognizerStateEnded)];
   
-  [self.engine panOffset:panCorrection andZoomScale:newZoomScale];
   [self.glkView setNeedsDisplay];
-  
-  if ([gestureRecognizer state] == UIGestureRecognizerStateEnded) {
-    self.zoomScale = newZoomScale;
-    self.panOffset = panCorrection;
-  }
 }
 
 #pragma mark -
@@ -190,22 +152,6 @@ completionHandler:(TMErrorBlock)completionHandler {
   return CGPointMake(point1.x + point2.x, point1.y + point2.y);
 }
 
-- (CGFloat)clampedScale:(CGFloat)scale {
-  return MIN(kMaxZoomScale, MAX(kMinZoomScale, scale));
-}
-
 @end
 
 NS_ASSUME_NONNULL_END
-
-
-
-
-
-
-
-
-
-
-
-

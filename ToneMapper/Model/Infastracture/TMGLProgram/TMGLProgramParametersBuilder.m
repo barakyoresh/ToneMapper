@@ -131,7 +131,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (TMGLProgramParameters *)identityProgramParameters {
   TMGLProgramParametersBuilder *builder = [[TMGLProgramParametersBuilder alloc] init];
   GLint textureValue = 0;
-  GLKMatrix4 MVP = GLKMatrix4MakeScale(1, -1, 1);
+  GLKMatrix4 MVP = GLKMatrix4Identity;
   
   [[[[[[[builder
          addAttribute:kInternalProgramTextureCoordinatesAttribute

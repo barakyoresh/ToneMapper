@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation TMActivityIndicator
 
-- (instancetype)initWithView:(UIView * __nonnull)view {
+- (instancetype)initWithView:(UIView *)view {
   if (self = [super init]) {
     UIActivityIndicatorView *indicator = [[UIActivityIndicatorView alloc]
                             initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];

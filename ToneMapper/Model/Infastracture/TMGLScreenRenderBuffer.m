@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation TMGLScreenRenderBuffer
 
-- (instancetype)initWithGLKView:(GLKView * __nonnull)glkView {
+- (instancetype)initWithGLKView:(GLKView *)glkView {
   if (self = [super init]) {
     _glkView = glkView;
   }

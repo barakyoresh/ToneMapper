@@ -44,6 +44,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Image renderer for extracting \c UIImage from a \c TMGLTexture object
 @property (strong, readonly, nonatomic) TMGLImageRenderer *imageRenderer;
 
+/// Translation and scale offset of the output texture compared to workspace display stored a matrix.
+@property (nonatomic) GLKMatrix4 translationScale;
+
 @end
 
 @implementation TMGLEngine
@@ -58,6 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
     _identityProccess = [[TMGLIdentityFilter alloc] initWithDrawer:self.drawer];
     _imageRenderer = [[TMGLImageRenderer alloc] initWithDrawer:self.drawer];
     self.workspaceInspectorProgram = [TMGLProgramParametersBuilder identityProgramParameters];
+    [self resetTranslationScale];
   }
   return self;
 }
@@ -71,8 +75,17 @@ NS_ASSUME_NONNULL_BEGIN
               withProgramParameters:self.workspaceInspectorProgram];
 }
 
-- (void)useFilter:(id<TMGLFilter> __nonnull)filter {
+- (void)applyFilter:(id<TMGLFilter>)filter {
   self.outputTexture = [filter applyOnTexture:self.inputTexture];
+}
+
+- (void)cancelFilter {
+  self.outputTexture = self.inputTexture;
+}
+
+- (void)acceptFilter {
+  self.inputTexture = [self.identityProccess applyOnTexture:self.outputTexture];
+  [self cancelFilter];
 }
 
 #pragma mark -
@@ -85,6 +98,7 @@ NS_ASSUME_NONNULL_BEGIN
     if (texture) {
       self.inputTexture = texture;
       self.outputTexture = texture;
+      [self resetTranslationScale];
       [self updateWorkspaceInspectorMVPMatrix:[self aspectRatioTransformationMatrix]];
       completionHandler(nil);
     } else {
@@ -113,6 +127,40 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Display
 #pragma mark -
 
+- (void)resetTranslationScale {
+  self.translationScale = GLKMatrix4Identity;
+}
+
+- (void)panOffset:(CGPoint)offset ended:(BOOL)ended {
+  GLKMatrix4 translationScale = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(offset.x, offset.y, 0),
+                                                   self.translationScale);
+  
+  [self updateWorkspaceInspectorMVPMatrix:
+    GLKMatrix4Multiply(translationScale, [self aspectRatioTransformationMatrix])];
+  if (ended) {
+    self.translationScale = translationScale;
+  }
+}
+
+- (void)zoomScaleOffset:(CGFloat)offset focalPoint:(CGPoint)focalPoint ended:(BOOL)ended {
+  GLKMatrix4 translationScale =
+    GLKMatrix4Multiply(GLKMatrix4MakeTranslation(-focalPoint.x, -focalPoint.y, 0),
+                       self.translationScale);
+  translationScale = GLKMatrix4Multiply(GLKMatrix4MakeScale(1 + offset, 1 + offset, 1),
+                                        translationScale);
+  translationScale = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(focalPoint.x, focalPoint.y, 0),
+                                        translationScale);
+  [self updateWorkspaceInspectorMVPMatrix:GLKMatrix4Multiply(translationScale,
+                                                          [self aspectRatioTransformationMatrix])];
+  if (ended) {
+    self.translationScale = translationScale;
+  }
+}
+
+- (void)outputBuffer:(id<TMGLBuffer>)outputBuffer {
+  self.outputBuffer = outputBuffer;
+}
+
 - (CGSize)outputSize {
   if (self.outputBuffer) {
     return self.outputBuffer.size;
@@ -120,14 +168,6 @@ NS_ASSUME_NONNULL_BEGIN
     return CGSizeMake([UIScreen mainScreen].bounds.size.width * [[UIScreen mainScreen] scale],
                       [UIScreen mainScreen].bounds.size.height * [[UIScreen mainScreen] scale]);
   }
-}
-
-- (void)panOffset:(CGPoint)offset andZoomScale:(float)scale{
-  GLKMatrix4 MVP = [self aspectRatioTransformationMatrix];
-  MVP = GLKMatrix4Multiply(GLKMatrix4MakeScale(scale, scale, 1), MVP);
-  MVP = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(offset.x, offset.y, 0), MVP);
-  
-  [self updateWorkspaceInspectorMVPMatrix:MVP];
 }
 
 - (GLKMatrix4)aspectRatioTransformationMatrix {
@@ -144,10 +184,10 @@ NS_ASSUME_NONNULL_BEGIN
   
   if (targetAspectRatio > 1) {
     //clip to width
-    aspectRatioMatrix = GLKMatrix4MakeScale(1, 1 / targetAspectRatio, 1);
+    aspectRatioMatrix = GLKMatrix4MakeScale(1, -(1 / targetAspectRatio), 1);
   } else {
     //clip to height
-    aspectRatioMatrix = GLKMatrix4MakeScale(1 * targetAspectRatio, 1, 1);
+    aspectRatioMatrix = GLKMatrix4MakeScale(1 * targetAspectRatio, -1, 1);
   }
 
   return aspectRatioMatrix;

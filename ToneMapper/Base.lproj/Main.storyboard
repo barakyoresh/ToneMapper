@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="kg7-R5-ZLd">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Editor View Controller-->
@@ -16,129 +18,72 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFv-8R-J30">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                <items>
-                                    <navigationItem id="Sv2-9W-DOn">
-                                        <barButtonItem key="leftBarButtonItem" title="Load Image" id="571-5y-fZT">
-                                            <connections>
-                                                <action selector="loadImage:" destination="vXZ-lx-hvc" id="qkR-L5-TaV"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Save Image" id="C5L-wH-lDd">
-                                            <connections>
-                                                <action selector="saveImage:" destination="vXZ-lx-hvc" id="Nsu-go-sK3"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hgd-Rc-kaV">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Tone Adjust">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tonalFeature:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cEb-SE-9ui"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="31i-Mo-rtp"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="5YT-eP-sYj"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="DIn-W1-eCU"/>
-                            <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="DQJ-1f-TK2"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="EHO-Ju-84u"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="FUS-A3-jcW"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="FkS-mj-Msx"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="Hbd-tk-J8L"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="HjP-ES-BzA"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="K8k-QZ-4pz"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="Kyp-h1-jna"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="NKa-2E-BBE"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="PPM-hH-bxS"/>
-                            <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="YLW-7Z-Y9k"/>
-                            <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="Ywc-Pn-gXH"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="ZNL-KP-yTF"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="Zim-k8-AMl"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="cDS-JN-IBn"/>
-                            <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="cWE-5U-xUB"/>
-                            <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="daR-mj-sbc"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="inD-l3-bSh"/>
-                            <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="ja1-HZ-i8d"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="p0Q-M1-ddU"/>
-                            <constraint firstItem="PFv-8R-J30" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="qwQ-fn-EjC"/>
-                            <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="rKt-OF-8ws"/>
-                            <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="rwu-QJ-wbj"/>
-                            <constraint firstAttribute="trailing" secondItem="PFv-8R-J30" secondAttribute="trailing" id="zEw-ry-CNI"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Hgd-Rc-kaV" secondAttribute="bottom" constant="8" symbolic="YES" id="glk-24-eTW"/>
+                            <constraint firstItem="Hgd-Rc-kaV" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="ji9-eI-cLf"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="PFv-8R-J30"/>
+                                <exclude reference="Hgd-Rc-kaV"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="31i-Mo-rtp"/>
-                                <exclude reference="5YT-eP-sYj"/>
-                                <exclude reference="DIn-W1-eCU"/>
-                                <exclude reference="DQJ-1f-TK2"/>
-                                <exclude reference="EHO-Ju-84u"/>
-                                <exclude reference="FUS-A3-jcW"/>
-                                <exclude reference="FkS-mj-Msx"/>
-                                <exclude reference="Hbd-tk-J8L"/>
-                                <exclude reference="HjP-ES-BzA"/>
-                                <exclude reference="K8k-QZ-4pz"/>
-                                <exclude reference="Kyp-h1-jna"/>
-                                <exclude reference="NKa-2E-BBE"/>
-                                <exclude reference="PPM-hH-bxS"/>
-                                <exclude reference="YLW-7Z-Y9k"/>
-                                <exclude reference="Ywc-Pn-gXH"/>
-                                <exclude reference="ZNL-KP-yTF"/>
-                                <exclude reference="Zim-k8-AMl"/>
-                                <exclude reference="cDS-JN-IBn"/>
-                                <exclude reference="cWE-5U-xUB"/>
-                                <exclude reference="daR-mj-sbc"/>
-                                <exclude reference="inD-l3-bSh"/>
-                                <exclude reference="ja1-HZ-i8d"/>
-                                <exclude reference="p0Q-M1-ddU"/>
-                                <exclude reference="qwQ-fn-EjC"/>
-                                <exclude reference="rKt-OF-8ws"/>
-                                <exclude reference="rwu-QJ-wbj"/>
-                                <exclude reference="zEw-ry-CNI"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=compact-widthClass=regular">
-                            <mask key="constraints">
-                                <exclude reference="DIn-W1-eCU"/>
-                                <exclude reference="DQJ-1f-TK2"/>
-                                <exclude reference="EHO-Ju-84u"/>
-                                <exclude reference="FUS-A3-jcW"/>
-                                <exclude reference="FkS-mj-Msx"/>
-                                <exclude reference="Hbd-tk-J8L"/>
-                                <exclude reference="HjP-ES-BzA"/>
-                                <exclude reference="K8k-QZ-4pz"/>
-                                <exclude reference="Kyp-h1-jna"/>
-                                <exclude reference="NKa-2E-BBE"/>
-                                <exclude reference="PPM-hH-bxS"/>
-                                <exclude reference="YLW-7Z-Y9k"/>
-                                <exclude reference="Ywc-Pn-gXH"/>
-                                <exclude reference="ZNL-KP-yTF"/>
-                                <exclude reference="Zim-k8-AMl"/>
-                                <exclude reference="cDS-JN-IBn"/>
-                                <exclude reference="cWE-5U-xUB"/>
-                                <exclude reference="daR-mj-sbc"/>
-                                <exclude reference="inD-l3-bSh"/>
-                                <exclude reference="ja1-HZ-i8d"/>
-                                <include reference="p0Q-M1-ddU"/>
-                                <exclude reference="qwQ-fn-EjC"/>
-                                <exclude reference="rwu-QJ-wbj"/>
-                                <exclude reference="zEw-ry-CNI"/>
+                                <exclude reference="glk-24-eTW"/>
+                                <exclude reference="ji9-eI-cLf"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="PFv-8R-J30"/>
+                                <include reference="Hgd-Rc-kaV"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="31i-Mo-rtp"/>
-                                <include reference="5YT-eP-sYj"/>
-                                <include reference="rKt-OF-8ws"/>
+                                <include reference="glk-24-eTW"/>
+                                <include reference="ji9-eI-cLf"/>
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" id="Sv2-9W-DOn">
+                        <barButtonItem key="leftBarButtonItem" title="Load Image" id="571-5y-fZT">
+                            <connections>
+                                <action selector="loadImage:" destination="vXZ-lx-hvc" id="qkR-L5-TaV"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save Image" id="C5L-wH-lDd">
+                            <connections>
+                                <action selector="saveImage:" destination="vXZ-lx-hvc" id="Nsu-go-sK3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1848" y="339"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="p4X-0a-ZE3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kg7-R5-ZLd" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="W68-xe-Ltq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="ZeN-iy-pUN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yFb-qo-tZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="930" y="339"/>
         </scene>

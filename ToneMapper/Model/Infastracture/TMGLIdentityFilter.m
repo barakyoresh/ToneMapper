@@ -38,8 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
   return self;
 }
 
-- (TMGLTexture *)applyOnTexture:(TMGLTexture * __nonnull)inputTexture {
-  if (!self.frameBuffer || CGSizeEqualToSize(self.frameBuffer.size, inputTexture.size)) {
+- (TMGLTexture *)applyOnTexture:(TMGLTexture *)inputTexture {
+  if (!self.frameBuffer || !CGSizeEqualToSize(self.frameBuffer.size, inputTexture.size)) {
     self.frameBuffer = [[TMGLTextureFrameBuffer alloc] initWithSize:inputTexture.size];
   }
   [self.drawer drawTexture:inputTexture toFrameBuffer:self.frameBuffer

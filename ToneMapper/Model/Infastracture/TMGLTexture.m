@@ -30,8 +30,8 @@ NS_ASSUME_NONNULL_BEGIN
     NSLog(@"UIImage: %@", image);
     NSLog(@"CGImage: %@", [image CGImage]);
     
-    GLKTextureInfo *texture = [GLKTextureLoader textureWithCGImage:[image CGImage] options:0
-                                                             error:&textureLoaderError];
+    GLKTextureInfo *texture =
+        [GLKTextureLoader textureWithCGImage:[image CGImage] options:0 error:&textureLoaderError];
     if (textureLoaderError) {
       NSLog(@"createTexture error: %@", textureLoaderError);
       return nil;

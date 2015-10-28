@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="kg7-R5-ZLd">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -30,16 +29,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Hgd-Rc-kaV" secondAttribute="bottom" constant="8" symbolic="YES" id="glk-24-eTW"/>
-                            <constraint firstItem="Hgd-Rc-kaV" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="ji9-eI-cLf"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Hgd-Rc-kaV" secondAttribute="bottom" constant="8" symbolic="YES" id="cJU-N2-HYN"/>
+                            <constraint firstItem="Hgd-Rc-kaV" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="kEl-F6-dh5"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="Hgd-Rc-kaV"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="glk-24-eTW"/>
-                                <exclude reference="ji9-eI-cLf"/>
+                                <exclude reference="cJU-N2-HYN"/>
+                                <exclude reference="kEl-F6-dh5"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -47,8 +46,8 @@
                                 <include reference="Hgd-Rc-kaV"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="glk-24-eTW"/>
-                                <include reference="ji9-eI-cLf"/>
+                                <include reference="cJU-N2-HYN"/>
+                                <include reference="kEl-F6-dh5"/>
                             </mask>
                         </variation>
                     </view>
@@ -67,7 +66,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1848" y="339"/>
+            <point key="canvasLocation" x="1861.5" y="339"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="p4X-0a-ZE3">

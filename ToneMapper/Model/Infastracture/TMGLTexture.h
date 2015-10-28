@@ -22,7 +22,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)attachToFrameBuffer;
 
 /// Binds the texture to the current context to be used in subsequent draws.
+/// This is equivalant to \c bindToLocation:0.
 - (void)bind;
+
+/// Binds the texture to the current cotnext as the texture in active texture described by
+/// \c location.
+- (void)bindToLocation:(GLuint)location;
 
 /// The Size associated with this texture object.
 @property (readonly, nonatomic) CGSize size;

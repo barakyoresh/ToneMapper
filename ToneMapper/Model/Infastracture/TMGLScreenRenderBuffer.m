@@ -26,8 +26,8 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (CGSize)size {
-  return CGSizeMake(self.glkView.bounds.size.width * [[UIScreen mainScreen] scale],
-                    self.glkView.bounds.size.height * [[UIScreen mainScreen] scale]);
+  return CGSizeMake(self.glkView.frame.size.width * [[UIScreen mainScreen] scale],
+                    self.glkView.frame.size.height * [[UIScreen mainScreen] scale]);
 }
 
 @end

@@ -33,9 +33,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @implementation TMEditorViewController
 
+static char * const kTonalFeaturePreprocessQueue = "TonalFeature queue";
 static NSString * const kAlertImageLoadFailure = @"Failed to load image.";
 static NSString * const kAlertImageSaveFailure = @"Failed to save image.";
 static NSString * const kAlertImageSaveSuccess = @"Image saved to gallery.";
+static NSString * const kAlertFeatureFailure = @"Feature loading failure.";
 static NSString * const kAlertDismissText = @"OK";
 
 - (void)viewDidLoad {
@@ -135,8 +137,20 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
 #pragma mark -
 
 - (IBAction)tonalFeature:(id)sender {
-  TMTonalFeature *tonalFeature = [[TMTonalFeature alloc] initWithDrawer:self.drawer];
-  [self segueToFeatureManagerWithFeature:tonalFeature];
+  [self.loadingIndicator start];
+  [self dispatchAsynchronouslyWithCurrentContext:^{
+    TMTonalFeature *tonalFeature =
+    [[TMTonalFeature alloc] initWithDrawer:self.drawer
+                           andInputTexture:[self.engine workspaceTexture]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [self.loadingIndicator stop];
+      if (tonalFeature) {
+        [self segueToFeatureManagerWithFeature:tonalFeature];
+      } else {
+        [self showSimpleAlert:kAlertFeatureFailure];
+      }
+    });
+  }];
 }
 
 
@@ -144,6 +158,17 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info {
   TMGLFeatureManagerViewController *featureManagerCV =
       [[TMGLFeatureManagerViewController alloc] initWithEngine:self.engine andFeature:feature];
   [self.navigationController pushViewController:featureManagerCV animated:NO];
+}
+
+- (void)dispatchAsynchronouslyWithCurrentContext:(TMVoidBlock)block {
+  //save current context
+  EAGLContext *currentContext = [EAGLContext currentContext];
+  
+  dispatch_async(dispatch_queue_create(kTonalFeaturePreprocessQueue, 0), ^{
+    //set context to main thread's current context
+    [EAGLContext setCurrentContext:currentContext];
+    block();
+  });
 }
 
 @end

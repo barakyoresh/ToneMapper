@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// A Wrapper to the opengl framework enabling easy usage of it via \c TMGLProgramParameters objects
 /// that encapsulate all there is to an opengl program.
 /// Textures are handled internally and and all programs that use textures will have the workspace
-/// texture bound internally before using them to draw.
+/// texture bound internally to location 0 before using them to draw.
 @interface TMGLEngine : NSObject
 
 /// Set base initializer as unavilable.
@@ -58,6 +58,10 @@ NS_ASSUME_NONNULL_BEGIN
 /// \c panOffset is the center of the zoom gesture, used to make the zoom's focal point in that
 /// point.
 - (void)zoomScaleOffset:(CGFloat)offset focalPoint:(CGPoint)focalPoint ended:(BOOL)ended;
+
+/// Returns the current workspace texture. This texture is what filters are applied on and
+/// whats eventually rendered to the \c outputBuffer.
+- (TMGLTexture *)workspaceTexture;
 
 /// Determines the output buffer of the engine's subsequent draws as \c outputBuffer.
 /// \c outputBuffer's size property will also determine the aspect ratio correction made from image

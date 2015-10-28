@@ -47,11 +47,11 @@ NS_ASSUME_NONNULL_BEGIN
   if (self = [super init]) {
     glGenTextures(1, &_handle);
     if (!_handle) {
-      NSLog(@"createTexture error: glGenTexture failure");
+      NSLog(@"createTexture error: glGenTexture failure errror: %d", glGetError());
       return nil;
     }
     _size = size;
-    glBindTexture(GL_TEXTURE_2D, self.handle);
+    [self bind];
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, size.width, size.height, 0, GL_RGBA, GL_UNSIGNED_BYTE,
                  NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -68,8 +68,14 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)bind {
+  [self bindToLocation:0];
+}
+
+- (void)bindToLocation:(GLuint)location {
+  glActiveTexture(GL_TEXTURE0 + location);
   glBindTexture(GL_TEXTURE_2D, self.handle);
 }
+
 
 - (void)dealloc {
   glDeleteTextures(1, &_handle);

@@ -41,7 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
   
   if (!program) {
     program = [self.compiler createProgramFromProgramParams:programParams];
-    [self.cache addToCache:programParams program:program];
+    if (program) {
+      [self.cache addToCache:programParams program:program];
+    }
   }
   return program;
 }

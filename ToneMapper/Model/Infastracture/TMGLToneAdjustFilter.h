@@ -17,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// Initializer method for \c TMToneAdjustFilter object, with \c drawer as its drawing manager.
 /// All parameters are initialized to their default values.
-- (instancetype)initWithDrawer:(TMGLDrawer *)drawer
-    NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDrawer:(TMGLDrawer *)drawer smoothTexture:(TMGLTexture *)smoothTexture
+    andSmootherTexture:(TMGLTexture *)smootherTexture NS_DESIGNATED_INITIALIZER;
 
 /// Brightness value, capped at [0, 1] sets the \c TMToneAdjustFilter's brightness level to
 /// \c brightness. Defaults at 0.5.
@@ -27,6 +27,14 @@ NS_ASSUME_NONNULL_BEGIN
 /// Global contrast value, capped at [0, 1] sets the \c TMToneAdjustFilter's Global contrast level
 /// to \c globalContrast. Defaults at 0.25.
 @property (nonatomic) float globalContrast;
+
+/// Global contrast value, capped at [0, 1] sets the \c TMToneAdjustFilter's Global contrast level
+/// to \c globalContrast. Defaults at 0.2.
+@property (nonatomic) float mediumContrast;
+
+/// Global contrast value, capped at [0, 1] sets the \c TMToneAdjustFilter's Global contrast level
+/// to \c globalContrast. Defaults at 0.2.
+@property (nonatomic) float fineContrast;
 
 /// Saturation value, capped at [0, 1] sets the \c TMToneAdjustFilter's saturation level to
 /// \c saturation. Defaults at 0.25.

@@ -66,6 +66,10 @@ NS_ASSUME_NONNULL_BEGIN
   return self;
 }
 
+- (TMGLTexture *)workspaceTexture {
+  return self.inputTexture;
+}
+
 #pragma mark -
 #pragma mark Drawing
 #pragma mark -
@@ -157,8 +161,10 @@ NS_ASSUME_NONNULL_BEGIN
   }
 }
 
-- (void)outputBuffer:(id<TMGLBuffer>)outputBuffer {
-  self.outputBuffer = outputBuffer;
+- (void)setOutputBuffer:(id<TMGLBuffer>)outputBuffer {
+  _outputBuffer = outputBuffer;
+  [self updateWorkspaceInspectorMVPMatrix:GLKMatrix4Multiply(self.translationScale,
+      [self aspectRatioTransformationMatrix])];
 }
 
 - (CGSize)outputSize {

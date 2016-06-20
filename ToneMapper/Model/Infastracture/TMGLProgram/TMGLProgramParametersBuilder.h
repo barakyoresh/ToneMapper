@@ -15,6 +15,8 @@ NS_ASSUME_NONNULL_BEGIN
 /// Types of unifroms that can be added as program parameters.
 typedef NS_ENUM(NSInteger, TMGLUniformType) {
   TMGLUniformInt,
+  TMGLUniformFloat,
+  TMGLUniformFloat2,
   TMGLUniformFloatMatrix4
 };
 

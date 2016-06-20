@@ -2,19 +2,21 @@
 // Created by Barak Yoresh.
 
 #import "TMGLProgramUniform1i.h"
+#import "TMGLProgramUniform1f.h"
+#import "TMGLProgramUniform2f.h"
 #import "TMGLProgramUniformMatrix4f.h"
 #import "TMGLProgramParametersBuilder.h"
 #import "TMGLProgramParameters.h"
 #import "TMGLProgramAttribute.h"
 #import "TMGLGeometry.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 static NSString * const kModelViewProjectionMatrixUniform = @"MVP";
 static NSString * const kInternalProgramTextureCoordinatesAttribute = @"texCoords";
 static NSString * const kInternalProgramPositionAttribute = @"position";
 static NSString * const kInternalProgramTextureSamplerUniform = @"texture";
 static NSString * const kInternalProgramShaderName = @"TMGLIdentityProgram";
-
-NS_ASSUME_NONNULL_BEGIN
 
 @interface TMGLProgramParametersBuilder()
 
@@ -79,6 +81,13 @@ NS_ASSUME_NONNULL_BEGIN
     case TMGLUniformFloatMatrix4:
       uniform = [[TMGLProgramUniformMatrix4f alloc] initWithName:name
                                                  andValuePointer:(GLfloat *)valuePointer];
+      break;
+    case TMGLUniformFloat2:
+      uniform = [[TMGLProgramUniform2f alloc] initWithName:name
+                                           andValuePointer:(GLfloat *)valuePointer];
+      break;
+    case TMGLUniformFloat:
+      uniform = [[TMGLProgramUniform1f alloc] initWithName:name andValue:*(GLfloat *)valuePointer];
       break;
     default:
       break;

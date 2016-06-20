@@ -8,6 +8,7 @@
 #import "TMGLTexture.h"
 #import "TMGLDrawer.h"
 #import "TMGLProgramUniformMatrix4f.h"
+#import "TMGLProgramUniform1f.h"
 
 #import <GLKit/GLKit.h>
 
@@ -20,13 +21,22 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString * const kAdjustmentMatrixUniform = @"adjustmentMatrix";
 static NSString * const kTonalProgramTextureCoordinatesAttribute = @"texCoords";
 static NSString * const kTonalProgramPositionAttribute = @"position";
+static NSString * const kTonalProgramSmoothTextureSamplerUniform = @"smoothTexture";
+static NSString * const kTonalProgramExtremelySmoothTextureSamplerUniform =
+    @"smootherTexture";
 static NSString * const kTonalProgramTextureSamplerUniform = @"texture";
+static NSString * const kTonalProgramMediumContrastUniform = @"mediumContrast";
+static NSString * const kTonalProgramFineContrastUniform = @"fineContrast";
 static NSString * const kTonalProgramShaderName = @"TMToneAdjustFilter";
+static const uint kSmoothTextureUnit = 1;
+static const uint kSmootherTextureUnit = 2;
 static const float kDefaultBrightness = 0.5f;
 static const float kDefaultGlobalContrast = 0.25f;
 static const float kDefaultSaturation = 0.25f;
 static const float kDefaultTint = 0.5f;
 static const float kDefaultTemprature = 0.5f;
+static const float kDefaultMediumContrast = 0.2f;
+static const float kDefaultFineContrast = 0.2f;
 static const float kChromaDampenWeight = 0.25f;
 static const GLKMatrix4 kRGBAtoYUVA = {0.299, -0.14713,  0.615,   0,
                                        0.587, -0.28886, -0.51499, 0,
@@ -48,23 +58,38 @@ static const GLKMatrix4 kYUVAtoRGBA = {1,        1,       1,       0,
 /// Internal \c TMGLTextureFrameBuffer object to be drawn on.
 @property (strong, nonatomic) TMGLTextureFrameBuffer *frameBuffer;
 
+/// Preprocessed smoothed version of input texture used for medium and fine contrast. this must be
+/// a smoothed version of future input texture.
+@property (strong, readonly, nonatomic) TMGLTexture *smoothTexture;
+
+/// Preprocessed extremely smoothed version of input texture used for medium and fine contrast. this
+/// must be a smoothed version of future input texture.
+@property (strong, readonly, nonatomic) TMGLTexture *smootherTexture;
+
 @end
 
 @implementation TMGLToneAdjustFilter
 
-- (instancetype)initWithDrawer:(TMGLDrawer * )drawer {
-  if (!drawer) {
+- (instancetype)initWithDrawer:(TMGLDrawer *)drawer smoothTexture:(TMGLTexture *)smoothTexture
+      andSmootherTexture:(TMGLTexture *)smootherTexture {
+  if (!drawer || !smoothTexture || !smootherTexture) {
     return nil;
   }
   
   if (self = [super init]) {
     _drawer = drawer;
+    _smoothTexture = smoothTexture;
+    [self.smoothTexture bindToLocation:kSmoothTextureUnit];
+    _smootherTexture = smootherTexture;
+    [self.smootherTexture bindToLocation:kSmootherTextureUnit];
     self.programParams = [self setupProgramParameters];
     self.brightness = kDefaultBrightness;
     self.saturation = kDefaultSaturation;
     self.temprature = kDefaultTemprature;
     self.tint = kDefaultTint;
     self.globalContrast = kDefaultGlobalContrast;
+    self.mediumContrast = kDefaultMediumContrast;
+    self.fineContrast = kDefaultFineContrast;
   }
   return self;
 }
@@ -72,9 +97,11 @@ static const GLKMatrix4 kYUVAtoRGBA = {1,        1,       1,       0,
 - (TMGLProgramParameters *)setupProgramParameters {
   TMGLProgramParametersBuilder *builder = [[TMGLProgramParametersBuilder alloc] init];
   GLuint textureValue = 0;
+  GLuint smoothTextureValue = kSmoothTextureUnit;
+  GLuint smootherTextureValue = kSmootherTextureUnit;
   GLKMatrix4 adjustmentMatrix = GLKMatrix4Identity;
   
-  [[[[[[[builder addAttribute:kTonalProgramTextureCoordinatesAttribute
+  [[[[[[[[[[[builder addAttribute:kTonalProgramTextureCoordinatesAttribute
      valuePointer:[TMGLGeometry quadTextureCoordinates]
      size:[TMGLGeometry quadTextureCoordinatesSize]
      type:[TMGLGeometry quadTextureCoordinatesType]
@@ -84,8 +111,16 @@ static const GLKMatrix4 kYUVAtoRGBA = {1,        1,       1,       0,
      andStride:[TMGLGeometry quadPositionsStride]]
      addUniform:kTonalProgramTextureSamplerUniform valuePointer:&textureValue
      andType:TMGLUniformInt]
+     addUniform:kTonalProgramSmoothTextureSamplerUniform valuePointer:&smoothTextureValue
+     andType:TMGLUniformInt]
+     addUniform:kTonalProgramExtremelySmoothTextureSamplerUniform
+     valuePointer:&smootherTextureValue andType:TMGLUniformInt]
      addUniform:kAdjustmentMatrixUniform valuePointer:&adjustmentMatrix
      andType:TMGLUniformFloatMatrix4]
+     addUniform:kTonalProgramMediumContrastUniform valuePointer:&_mediumContrast
+     andType:TMGLUniformFloat]
+     addUniform:kTonalProgramFineContrastUniform valuePointer:&_fineContrast
+     andType:TMGLUniformFloat]
      setVertexShader:kTonalProgramShaderName]
      setFragmentShader:kTonalProgramShaderName]
      setDrawingMethod:GL_TRIANGLE_STRIP andVertexCount:4];
@@ -98,6 +133,14 @@ static const GLKMatrix4 kYUVAtoRGBA = {1,        1,       1,       0,
   self.programParams =
       [self.programParams parametersWithReplacedUniform:[[TMGLProgramUniformMatrix4f alloc]
       initWithName:kAdjustmentMatrixUniform andValuePointer:(GLfloat *)&adjustmentMatrix]];
+  
+  self.programParams =
+      [self.programParams parametersWithReplacedUniform:[[TMGLProgramUniform1f alloc]
+      initWithName:kTonalProgramMediumContrastUniform andValue:self.mediumContrast * 4 - 1]];
+  
+  self.programParams =
+      [self.programParams parametersWithReplacedUniform:[[TMGLProgramUniform1f alloc]
+      initWithName:kTonalProgramFineContrastUniform andValue:self.fineContrast * 4 - 1]];
   
   if (!self.frameBuffer || !CGSizeEqualToSize(self.frameBuffer.size, inputTexture.size)) {
     self.frameBuffer = [[TMGLTextureFrameBuffer alloc] initWithSize:inputTexture.size];
@@ -135,6 +178,14 @@ static const GLKMatrix4 kYUVAtoRGBA = {1,        1,       1,       0,
 
 - (void)setGlobalContrast:(float)globalContrast {
   _globalContrast = capped(globalContrast);
+}
+
+- (void)setMediumContrast:(float)mediumContrast {
+  _mediumContrast = capped(mediumContrast);
+}
+
+- (void)setFineContrast:(float)fineContrast {
+  _fineContrast = capped(fineContrast);
 }
 
 - (GLKMatrix4)makeGlobalContrastMatrix {

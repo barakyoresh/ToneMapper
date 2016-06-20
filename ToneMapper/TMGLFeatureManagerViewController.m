@@ -9,7 +9,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-static const int kNavigationBarHeight = 44;
 static NSString * const kCancelLabel = @"X";
 static NSString * const kAcceptLabel = @"√";
 
@@ -44,7 +43,9 @@ static NSString * const kAcceptLabel = @"√";
   [self.view setBackgroundColor:[UIColor clearColor]];
   [self addTMGLviewController];
   [self configureNavigationBar];
-  [self inflateFeatureControls];
+  [self inflateFeatureControlsInFrame:CGRectMake(0,
+      self.navigationController.navigationBar.bounds.size.height, self.view.bounds.size.width,
+      self.view.bounds.size.height - self.navigationController.navigationBar.bounds.size.height)];
 }
 
 - (void)addTMGLviewController {
@@ -62,7 +63,6 @@ static NSString * const kAcceptLabel = @"√";
   UIBarButtonItem *cancelButton =
       [[UIBarButtonItem alloc] initWithTitle:kCancelLabel style:UIBarButtonItemStylePlain
                                       target:self action:@selector(cancel)];
-  
   UIBarButtonItem *acceptButton =
       [[UIBarButtonItem alloc] initWithTitle:kAcceptLabel style:UIBarButtonItemStylePlain
                                       target:self action:@selector(accept)];
@@ -84,14 +84,20 @@ static NSString * const kAcceptLabel = @"√";
 #pragma mark Feature controls
 #pragma mark -
 
-- (void)inflateFeatureControls {
-  float navigationBarHeight = self.navigationController.navigationBar.bounds.size.height;
-  CGRect controlRect = CGRectMake(0, navigationBarHeight, self.view.bounds.size.width,
-                                  self.view.bounds.size.height - navigationBarHeight);
-  UIView *featureControls = [self.feature controlsWithFrame:controlRect];
+- (void)viewWillTransitionToSize:(CGSize)size
+       withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+  [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+  [self inflateFeatureControlsInFrame:CGRectMake(0,
+      self.navigationController.navigationBar.bounds.size.height, size.width,
+      size.height - self.navigationController.navigationBar.bounds.size.height)];
+}
+
+- (void)inflateFeatureControlsInFrame:(CGRect)rect {
+  [self.featureControlsContainer removeFromSuperview];
+  UIView *featureControls = [self.feature controlsWithFrame:rect];
   self.featureControlsContainer =
       [[UIView alloc] initWithFrame:CGRectMake(featureControls.frame.origin.x,
-                                               featureControls.frame.origin.y + navigationBarHeight,
+                                               featureControls.frame.origin.y + self.navigationController.navigationBar.bounds.size.height,
                                                featureControls.frame.size.width,
                                                featureControls.frame.size.height)];
   featureControls.frame = featureControls.bounds;

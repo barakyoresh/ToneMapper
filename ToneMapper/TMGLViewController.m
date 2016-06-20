@@ -38,8 +38,8 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 - (void)viewDidLoad {
-  self.loadingIndicator = [[TMActivityIndicator alloc] initWithView:self.view];
   [self setupGLKView];
+  self.loadingIndicator = [[TMActivityIndicator alloc] initWithView:self.view];
   [self enableScrolling];
 }
 
@@ -59,7 +59,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)viewWillTransitionToSize:(CGSize)size
        withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
   self.glkView.frame =
-    CGRectMake(self.glkView.frame.origin.x, self.glkView.frame.origin.y, size.width, size.height);
+      CGRectMake(self.glkView.frame.origin.x, self.glkView.frame.origin.y, size.width, size.height);
+  self.engine.outputBuffer = [[TMGLScreenRenderBuffer alloc] initWithGLKView:self.glkView];
   [self.glkView setNeedsDisplay];
 }
 

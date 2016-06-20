@@ -42,7 +42,7 @@ static NSString * const kFragmentShaderFileExtension = @"fsh";
                                                    withFileType:kFragmentShaderFileExtension];
   
   if (vertexShader == 0 || fragmentShader == 0) {
-    return 0;
+    return nil;
   }
   
   GLuint program = [self createProgramWithShaders:@[@(fragmentShader), @(vertexShader)]];
